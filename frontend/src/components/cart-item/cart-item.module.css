@@ -1,0 +1,42 @@
+.cart-item {
+  display: flex;
+  width: 100%;
+  flex-direction: columns;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
+.item {
+  margin: 0 4px;
+}
+
+.invisible {
+  color: transparent;
+  cursor: none;
+  pointer-events: none;
+}
+
+.amount {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.change-amount {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 17px;
+}
