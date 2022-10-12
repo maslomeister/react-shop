@@ -1,0 +1,23 @@
+.footer-cart {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  bottom: 0;
+  background-color: #303030;
+  color: #fff;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 16px 32px;
+}
+
+.cart {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
