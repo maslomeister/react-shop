@@ -49,7 +49,7 @@ export const ShopItem = ({ id, img, name, price, inStock }) => {
   };
 
   const aboutProductHandler = () => {
-    navigate(`/product/${id}`);
+    navigate(`/products/${id}`);
   };
 
   return (

@@ -27,7 +27,7 @@ export const fetchProducts = async (dispatch, onRequest, onSuccess, onError) => 
 export const fetchProduct = async (id, dispatch, onRequest, onSuccess, onError) => {
   dispatch(onRequest());
   try {
-    const data = await getData(API_URL + "/cart", 300);
+    const data = await getData(`${API_URL}/products/${id}`, 300);
     checkForError(data);
     dispatch(onSuccess(data));
   } catch (err) {
