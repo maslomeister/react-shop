@@ -42,6 +42,10 @@ router.put("/", async function (req, res) {
   const { authorization } = req.headers;
   const { quantity = 1, productId } = req.body;
 
+  if (productId === undefined) {
+    return res.status(400).json({ error: true, msg: "Вы не указали id продукта" });
+  }
+
   if (isEmptyOrUndefined(authorization)) {
     return res.status(401).json({ error: true, msg: "Токен авторизации отсутствует" });
   }
@@ -157,8 +161,6 @@ router.delete("/", async function (req, res) {
         await db.push(`/products/${productId}`, productInfo);
 
         delete userCart[productId];
-
-        console.log(userCart);
 
         await db.push(`/carts/${userData.name}`, userCart);
 
