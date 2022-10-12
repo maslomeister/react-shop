@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Spinner } from "../spinner/spinner.jxs";
+import { Spinner } from "../spinner/spinner.jsx";
 import { authUserRequest, authUserSuccess, authUserError } from "../../store/actions/auth";
 import closeIcon from "../../icons/close.svg";
 import { loginUser } from "../../api/api";

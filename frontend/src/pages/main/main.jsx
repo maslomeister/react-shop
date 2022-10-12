@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { clearProduct } from "../../store/actions/shop";
 import { ShopItem } from "../../components/shop-item/shop-item";
-import { Spinner } from "../../components/spinner/spinner.jxs";
+import { Spinner } from "../../components/spinner/spinner.jsx";
 
 import styles from "./main.module.css";
 
