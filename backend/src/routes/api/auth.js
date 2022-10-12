@@ -28,7 +28,7 @@ router.post("/", async function (req, res) {
     return res.status(401).json({ error: true, msg: "Неверный логин или пароль" });
   }
 
-  return res.status(200).json({ error: false, authToken: foundUser.authToken });
+  return res.status(200).json({ error: false, authToken: foundUser.authToken, userRole: foundUser.role });
 });
 
 module.exports = router;
