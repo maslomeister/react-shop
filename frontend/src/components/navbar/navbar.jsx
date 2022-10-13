@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleModal } from "../../store/actions/shop";
+import { clearCartLogout, toggleModal } from "../../store/actions/shop";
 import { userLogout } from "../../store/actions/auth";
 
 import styles from "./navbar.module.css";
@@ -18,6 +18,7 @@ export const Navbar = () => {
   const onLogoutClick = () => {
     localStorage.removeItem("authToken");
     dispatch(userLogout());
+    dispatch(clearCartLogout());
   };
 
   return (
