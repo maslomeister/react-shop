@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchCart, fetchProducts } from "../../api/api";
+import { fetchCartApi, fetchProductsApi, verifyUserApi } from "../../api/api";
 import { authUserSuccess } from "../../store/actions/auth";
 import {
   fetchProductsRequest,
@@ -12,6 +12,7 @@ import {
   cartDataSuccess,
   cartDataError,
 } from "../../store/actions/shop";
+import { ShowErrorOrLoading } from "../show-error-or-loading/show-error-or-loading";
 import { Navbar } from "../navbar/navbar";
 import { Main } from "../../pages/main/main";
 import { About } from "../../pages/about/about";
@@ -27,41 +28,79 @@ import styles from "./app.module.css";
 export const App = () => {
   const [showFooter, setShowFooter] = useState(true);
   const dispatch = useDispatch();
-  const { authenticated } = useSelector((state) => state.auth);
-  const { modalIsOpened } = useSelector((state) => state.shop);
+  const { authenticated, isUser } = useSelector((state) => state.auth);
+  const { modalIsOpened, productsError } = useSelector((state) => state.shop);
+
+  const [verifyUserState, setVerifyUserState] = useState({
+    loading: true,
+    error: "",
+  });
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("authToken"));
+    const localToken = localStorage.getItem("authToken");
 
-    if (userData) {
-      dispatch(authUserSuccess(userData));
-      fetchCart(userData.authToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
+    if (localToken) {
+      verifyUserApi(
+        localToken,
+        () =>
+          setVerifyUserState((prevState) => {
+            return { ...prevState, loading: true };
+          }),
+        (data) => {
+          setVerifyUserState((prevState) => {
+            return { ...prevState, loading: false };
+          });
+          dispatch(authUserSuccess({ authToken: localToken, userRole: data.userRole, name: data.name }));
+          fetchCartApi(localToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
+        },
+        (err) =>
+          setVerifyUserState((prevState) => {
+            return { ...prevState, loading: false, error: err };
+          })
+      );
+    } else {
+      setVerifyUserState((prevState) => {
+        return { ...prevState, loading: false };
+      });
     }
   }, []);
 
+  const showError = () => {
+    if (verifyUserState.error) {
+      return verifyUserState.error;
+    }
+    if (productsError) {
+      return productsError;
+    }
+
+    return "";
+  };
+
   useEffect(() => {
-    fetchProducts(dispatch, fetchProductsRequest, fetchProductsSuccess, fetchProductsError);
+    fetchProductsApi(dispatch, fetchProductsRequest, fetchProductsSuccess, fetchProductsError);
   }, []);
 
   return (
     <div className={styles.app}>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/products/:id" element={<Product />} />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute authenticated={authenticated}>
-              <Cart showFooter={setShowFooter} />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {modalIsOpened && <LoginModal />}
-      {showFooter && authenticated && <FooterCart />}
+      <ShowErrorOrLoading loading={verifyUserState.loading} error={showError()}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/products/:id" element={<Product />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute authenticated={authenticated}>
+                <Cart showFooter={setShowFooter} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        {modalIsOpened && <LoginModal />}
+        {showFooter && authenticated && isUser && <FooterCart />}
+      </ShowErrorOrLoading>
     </div>
   );
 };
