@@ -3,13 +3,13 @@ import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Spinner } from "../spinner/spinner.jsx";
+import { loginUserApi } from "../../api/api";
 import { authUserRequest, authUserSuccess, authUserError } from "../../store/actions/auth";
-import closeIcon from "../../icons/close.svg";
-import { loginUser } from "../../api/api";
+import { Spinner } from "../spinner/spinner.jsx";
 import { Button } from "../button/button";
 import { Input } from "../input/input";
 import { toggleModal } from "../../store/actions/shop";
+import closeIcon from "../../icons/close.svg";
 
 import styles from "./login-modal.module.css";
 
@@ -33,21 +33,20 @@ export function LoginModal() {
   const closeHandler = useCallback(() => {
     setInputValues({ ...emptyFields });
     setErrorValues({ ...emptyFields });
-    dispatch();
     dispatch(toggleModal());
   }, []);
 
   useEffect(() => {
     if (authenticated) {
       if (authToken) {
-        localStorage.setItem("authToken", JSON.stringify({ authToken, userRole }));
+        localStorage.setItem("authToken", authToken);
         closeHandler();
         if (location.pathname !== "/") {
           navigate("/");
         }
       }
     }
-  }, [authenticated, authToken, userRole, closeHandler, location.pathname, navigate]);
+  }, [authenticated, authToken, userRole, location.pathname]);
 
   useEffect(() => {
     const closeOnESC = (e) => {
@@ -73,7 +72,7 @@ export function LoginModal() {
       const login = event.currentTarget.elements.login.value.trim();
       const password = event.currentTarget.elements.password.value.trim();
 
-      loginUser(login, password, dispatch, authUserRequest, authUserSuccess, authUserError);
+      loginUserApi(login, password, dispatch, authUserRequest, authUserSuccess, authUserError);
     }
   };
 
@@ -142,6 +141,7 @@ export function LoginModal() {
             <form className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate>
               <Input
                 label="Логин*"
+                labelColor="#fff"
                 type="text"
                 name="login"
                 placeholder="Логин"
@@ -152,6 +152,7 @@ export function LoginModal() {
               />
               <Input
                 label="Пароль*"
+                labelColor="#fff"
                 type="password"
                 name="password"
                 placeholder="Пароль"
