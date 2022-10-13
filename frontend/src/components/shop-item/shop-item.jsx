@@ -1,12 +1,24 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addToCart } from "../../store/actions/shop";
 import { Button } from "../button/button";
-import { addProductToCart } from "../../api/api";
+import { addToCart } from "../../store/actions/shop";
+import { addProductToCartApi } from "../../api/api";
 
 import styles from "./shop-item.module.css";
+
+const IsUserAndAuthenticated = ({ authenticated, isUser, children }) => {
+  if (authenticated) {
+    if (isUser) {
+      return children;
+    } else {
+      return <></>;
+    }
+  }
+
+  return <p>Войдите чтобы добавить в корзину</p>;
+};
 
 export const ShopItem = ({ id, img, name, price, inStock }) => {
   const dispatch = useDispatch();
@@ -15,10 +27,10 @@ export const ShopItem = ({ id, img, name, price, inStock }) => {
     loading: false,
     error: false,
   });
-  const { authenticated, authToken } = useSelector((state) => state.auth);
+  const { authenticated, authToken, isUser } = useSelector((state) => state.auth);
 
   const onClickHandler = () => {
-    addProductToCart(
+    addProductToCartApi(
       id,
       authToken,
       undefined,
@@ -63,11 +75,9 @@ export const ShopItem = ({ id, img, name, price, inStock }) => {
           <p>Цена:</p>
           <p>{price}$</p>
         </div>
-        {authenticated ? (
+        <IsUserAndAuthenticated authenticated={authenticated} isUser={isUser}>
           <Button inStock={inStock} loading={addToCartState.loading} error={addToCartState.error} onClick={onClickHandler} />
-        ) : (
-          <p style={{ fontSize: "16px" }}>Войдите чтобы добавить в корзину</p>
-        )}
+        </IsUserAndAuthenticated>
       </div>
     </div>
   );
