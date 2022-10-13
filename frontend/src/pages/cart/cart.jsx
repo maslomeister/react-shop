@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { clearCart } from "../../api/api";
-import { clearCartSuccess } from "../../store/actions/shop";
+import { clearCartApi } from "../../api/api";
+import { clearCart } from "../../store/actions/shop";
 import { Button } from "../../components/button/button";
 import { CartItem } from "../../components/cart-item/cart-item";
 
@@ -27,7 +27,7 @@ export const Cart = ({ showFooter }) => {
   }, []);
 
   const onClearCartHandler = () => {
-    clearCart(
+    clearCartApi(
       authToken,
       () =>
         setClearCartState((prevState) => {
@@ -37,7 +37,7 @@ export const Cart = ({ showFooter }) => {
         setClearCartState((prevState) => {
           return { ...prevState, loading: false };
         });
-        dispatch(clearCartSuccess());
+        dispatch(clearCart());
       },
       () => {
         setClearCartState((prevState) => {
@@ -68,7 +68,7 @@ export const Cart = ({ showFooter }) => {
               <thead>
                 <tr>
                   <th className={styles.id}>id</th>
-                  <th className={styles.price}>Имя</th>
+                  <th className={styles.name}>Имя</th>
                   <th className={styles.price}>Цена</th>
                   <th className={styles.amount}>Кол-во</th>
                   <th className={styles.total}>Итог</th>
