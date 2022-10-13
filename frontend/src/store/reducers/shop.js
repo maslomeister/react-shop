@@ -5,6 +5,7 @@ import {
   FETCH_PRODUCT_REQUEST,
   FETCH_PRODUCT_SUCCESS,
   FETCH_PRODUCT_ERROR,
+  CHANGE_PRODUCT_INFO,
   CLEAR_PRODUCT,
   TOGGLE_LOGIN_MODAL,
   FETCH_CART_REQUEST,
@@ -12,6 +13,7 @@ import {
   FETCH_CART_ERROR,
   ADD_TO_CART,
   CLEAR_CART,
+  CLEAR_CART_LOGOUT,
   REMOVE_ITEM_FROM_CART,
 } from "../actions/action-types/shop";
 
@@ -26,7 +28,7 @@ let initialState = {
   cartTotal: 0,
   product: {},
   productError: "",
-  productLoading: false,
+  productLoading: true,
 };
 
 function reducer(state = initialState, action) {
@@ -126,7 +128,8 @@ function reducer(state = initialState, action) {
 
         const total = cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
 
-        if (state.product) {
+        const isEmpty = Object.keys(state.product).length === 0;
+        if (!isEmpty) {
           const product = { ...state.product };
           product.inStock = products[productIndex].inStock;
           return {
@@ -149,11 +152,45 @@ function reducer(state = initialState, action) {
         ...state,
       };
     }
-    case CLEAR_CART:
+    case CLEAR_CART_LOGOUT:
       return {
         ...state,
         cart: [],
       };
+    case CLEAR_CART:
+      const products = [...state.products];
+      const cart = [...state.cart];
+
+      cart.map((item) => {
+        const productIndex = products.findIndex((product) => product.id === item.id);
+        return (products[productIndex].inStock += item.quantity);
+      });
+
+      return {
+        ...state,
+        cart: [],
+        products,
+      };
+    case CHANGE_PRODUCT_INFO: {
+      const products = [...state.products];
+      const productIndex = products.findIndex((item) => item.id === action.payload.id);
+
+      products[productIndex] = {
+        ...products[productIndex],
+        name: action.payload.data.name,
+        description: action.payload.data.description,
+        price: action.payload.data.price,
+        inStock: action.payload.data.inStock,
+      };
+
+      const product = products[productIndex];
+
+      return {
+        ...state,
+        products,
+        product,
+      };
+    }
     case REMOVE_ITEM_FROM_CART: {
       const itemId = action.payload.id;
 

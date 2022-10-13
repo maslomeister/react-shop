@@ -4,6 +4,8 @@ let initialState = {
   loading: false,
   authenticated: false,
   userRole: "",
+  isUser: false,
+  userName: "",
   authToken: "",
   error: "",
 };
@@ -17,12 +19,20 @@ function reducer(state = initialState, action) {
         error: "",
       };
     case AUTH_USER_SUCCESS:
+      let isUser = false;
+
+      if (action.payload.userRole === "user") {
+        isUser = true;
+      }
+
       return {
         ...state,
         authLoading: false,
         authenticated: true,
         authToken: action.payload.authToken,
         userRole: action.payload.userRole,
+        userName: action.payload.name,
+        isUser,
       };
     case AUTH_USER_ERROR:
       return {
