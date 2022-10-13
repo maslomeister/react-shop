@@ -9,7 +9,7 @@ export function authUserRequest() {
 export function authUserSuccess(data) {
   return {
     type: AUTH_USER_SUCCESS,
-    payload: { authToken: data.authToken, userRole: data.userRole },
+    payload: { authToken: data.authToken, userRole: data.userRole, name: data.name },
   };
 }
 

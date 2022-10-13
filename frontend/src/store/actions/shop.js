@@ -5,6 +5,7 @@ import {
   FETCH_PRODUCT_REQUEST,
   FETCH_PRODUCT_SUCCESS,
   FETCH_PRODUCT_ERROR,
+  CHANGE_PRODUCT_INFO,
   CLEAR_PRODUCT,
   TOGGLE_LOGIN_MODAL,
   FETCH_CART_REQUEST,
@@ -12,6 +13,7 @@ import {
   FETCH_CART_ERROR,
   ADD_TO_CART,
   CLEAR_CART,
+  CLEAR_CART_LOGOUT,
   REMOVE_ITEM_FROM_CART,
 } from "./action-types/shop";
 
@@ -68,9 +70,15 @@ export function addToCart(id, quantity) {
   };
 }
 
-export function clearCartSuccess() {
+export function clearCart() {
   return {
     type: CLEAR_CART,
+  };
+}
+
+export function clearCartLogout() {
+  return {
+    type: CLEAR_CART_LOGOUT,
   };
 }
 
@@ -98,6 +106,13 @@ export function fetchProductError(error) {
   return {
     type: FETCH_PRODUCT_ERROR,
     payload: { error },
+  };
+}
+
+export function changeProductData(id, data) {
+  return {
+    type: CHANGE_PRODUCT_INFO,
+    payload: { id, data },
   };
 }
 
