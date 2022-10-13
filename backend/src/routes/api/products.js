@@ -49,6 +49,7 @@ router.put("/:id", async function (req, res) {
   }
 
   products[id] = {
+    ...products[id],
     name,
     description,
     price,
@@ -60,13 +61,9 @@ router.put("/:id", async function (req, res) {
     Object.keys(carts).forEach((key) => {
       Object.keys(carts[key]).forEach((value) => {
         if (value === id) {
-          if (inStock === 0) {
-            delete carts[key][value];
-          } else {
-            carts[key][value].name = name;
-            carts[key][value].price = price;
-            carts[key][value].totalPrice = price * carts[key][value].quantity;
-          }
+          carts[key][value].name = name;
+          carts[key][value].price = price;
+          carts[key][value].totalPrice = price * carts[key][value].quantity;
         }
       });
     });
