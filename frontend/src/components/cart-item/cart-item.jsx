@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addProductToCart, deleteProductFromCart } from "../../api/api";
+import { addProductToCartApi, deleteProductFromCartApi } from "../../api/api";
 import { addToCart, removeItemFromCart } from "../../store/actions/shop";
 import { Button } from "../button/button";
 
@@ -51,7 +51,7 @@ export const CartItem = ({ id, name, price, quantity, total }) => {
   };
 
   const changeAmount = (amount) => {
-    addProductToCart(
+    addProductToCartApi(
       id,
       authToken,
       amount,
@@ -82,7 +82,7 @@ export const CartItem = ({ id, name, price, quantity, total }) => {
   };
 
   const deleteItem = () => {
-    deleteProductFromCart(
+    deleteProductFromCartApi(
       id,
       authToken,
       () =>
