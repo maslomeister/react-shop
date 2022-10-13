@@ -46,15 +46,15 @@ export const Button = ({ inStock, inactive, variant, width, type, onClick, loadi
     }
   }, [inStock]);
 
-  const blockedType = () => {
+  const blockedType = useMemo(() => {
     if (inactive) {
       return styles.inactive;
     } else {
       return "";
     }
-  };
+  }, [inactive]);
 
-  const variantType = () => {
+  const variantType = useMemo(() => {
     switch (variant) {
       case "red":
         return styles.red;
@@ -63,11 +63,11 @@ export const Button = ({ inStock, inactive, variant, width, type, onClick, loadi
       default:
         return "";
     }
-  };
+  }, [variant]);
 
   return (
     <button
-      className={styles.button + " " + blockedType() + " " + variantType() + " " + buyStyle + " " + loadingStyle}
+      className={`${styles.button} ${blockedType} ${variantType} ${buyStyle} ${loadingStyle}`}
       type={type}
       onClick={onClickHandler}
       style={{ width: width + "px" }}
