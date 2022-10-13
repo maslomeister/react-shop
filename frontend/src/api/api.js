@@ -1,10 +1,14 @@
 const API_URL = "http://localhost:5069/api";
 
 const getData = async (url, minDelay, params) => {
-  const fetchResult = await fetch(url, params);
-  const data = await fetchResult.json();
-  const [res] = await Promise.allSettled([data, new Promise((resolve) => setTimeout(resolve, minDelay))]);
-  return res.value;
+  try {
+    const fetchResult = await fetch(url, params);
+    const data = await fetchResult.json();
+    const [res] = await Promise.allSettled([data, new Promise((resolve) => setTimeout(resolve, minDelay))]);
+    return res.value;
+  } catch (err) {
+    return { error: true, msg: err.message };
+  }
 };
 
 const checkForError = (data) => {
@@ -13,7 +17,7 @@ const checkForError = (data) => {
   }
 };
 
-export const fetchProducts = async (dispatch, onRequest, onSuccess, onError) => {
+export const fetchProductsApi = async (dispatch, onRequest, onSuccess, onError) => {
   dispatch(onRequest());
   try {
     const data = await getData(API_URL + "/products", 300);
@@ -24,7 +28,7 @@ export const fetchProducts = async (dispatch, onRequest, onSuccess, onError) => 
   }
 };
 
-export const fetchProduct = async (id, dispatch, onRequest, onSuccess, onError) => {
+export const fetchProductApi = async (id, dispatch, onRequest, onSuccess, onError) => {
   dispatch(onRequest());
   try {
     const data = await getData(`${API_URL}/products/${id}`, 300);
@@ -35,7 +39,22 @@ export const fetchProduct = async (id, dispatch, onRequest, onSuccess, onError) 
   }
 };
 
-export const addProductToCart = async (productId, authToken, quantity, onRequest, onSuccess, onError) => {
+export const changeProductInfoApi = async (id, authToken, product, onRequest, onSuccess, onError) => {
+  onRequest();
+  try {
+    const data = await getData(`${API_URL}/products/${id}`, 300, {
+      method: "PUT",
+      headers: { Authorization: authToken, "Content-Type": "application/json" },
+      body: JSON.stringify({ name: product.name, description: product.description, price: product.price, inStock: product.inStock }),
+    });
+    checkForError(data);
+    onSuccess(data);
+  } catch (err) {
+    onError(err);
+  }
+};
+
+export const addProductToCartApi = async (productId, authToken, quantity, onRequest, onSuccess, onError) => {
   onRequest();
   try {
     const data = await getData(API_URL + "/cart", 500, {
@@ -50,7 +69,7 @@ export const addProductToCart = async (productId, authToken, quantity, onRequest
   }
 };
 
-export const deleteProductFromCart = async (productId, authToken, onRequest, onSuccess, onError) => {
+export const deleteProductFromCartApi = async (productId, authToken, onRequest, onSuccess, onError) => {
   onRequest();
   try {
     const data = await getData(API_URL + "/cart", 500, {
@@ -65,7 +84,7 @@ export const deleteProductFromCart = async (productId, authToken, onRequest, onS
   }
 };
 
-export const loginUser = async (login, password, dispatch, onRequest, onSuccess, onError) => {
+export const loginUserApi = async (login, password, dispatch, onRequest, onSuccess, onError) => {
   dispatch(onRequest());
   try {
     const data = await getData(API_URL + "/auth", 300, {
@@ -80,7 +99,20 @@ export const loginUser = async (login, password, dispatch, onRequest, onSuccess,
   }
 };
 
-export const fetchCart = async (authToken, dispatch, onRequest, onSuccess, onError) => {
+export const verifyUserApi = async (authToken, onRequest, onSuccess, onError) => {
+  onRequest();
+  try {
+    const data = await getData(API_URL + "/auth", 300, {
+      headers: { Authorization: authToken, "Content-Type": "application/json" },
+    });
+    checkForError(data);
+    onSuccess(data);
+  } catch (err) {
+    onError(err);
+  }
+};
+
+export const fetchCartApi = async (authToken, dispatch, onRequest, onSuccess, onError) => {
   dispatch(onRequest());
   try {
     const data = await getData(API_URL + "/cart", 300, {
@@ -93,7 +125,7 @@ export const fetchCart = async (authToken, dispatch, onRequest, onSuccess, onErr
   }
 };
 
-export const clearCart = async (authToken, onRequest, onSuccess, onError) => {
+export const clearCartApi = async (authToken, onRequest, onSuccess, onError) => {
   onRequest();
   try {
     const data = await getData(API_URL + "/cart", 500, {
