@@ -13,3 +13,7 @@ export function getNoun(number, one, two, five) {
   }
   return five;
 }
+
+export const allowOnlyNumbers = (str) => {
+  return str.trim().replace(/[^0-9]/g, "");
+};
