@@ -2,26 +2,30 @@
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
 }
 
 .input {
-  background-color: #c5c6cb;
   border-radius: 12px;
-  border: 0;
-  color: #3c3c45;
+  border: solid 1px #3c3c45;
+  color: #000;
   font-size: 18px;
   height: 40px;
   outline: 0;
   padding: 4px 20px 0;
   width: 100%;
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+.input:focus {
+  box-shadow: 0 0 2pt 1pt #3c4fe0;
 }
 
 .label {
-  color: #9a9aa1;
+  color: #1e1c1d;
   padding-left: 8px;
+  font-size: 18px;
   line-height: 14px;
   pointer-events: none;
 }
@@ -33,7 +37,6 @@
 .error {
   color: #ef5656;
   font-size: 14px;
-  height: 16px;
   padding-left: 8px;
   pointer-events: none;
 }
