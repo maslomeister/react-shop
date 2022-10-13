@@ -2,13 +2,21 @@ import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getNoun } from "../../utils/utils";
-import { fetchCart } from "../../api/api";
+import { fetchCartApi } from "../../api/api";
 import { cartDataError, cartDataRequest, cartDataSuccess } from "../../store/actions/shop";
+import { getNoun } from "../../utils/utils";
 
 import cartIcon from "../../icons/cart.svg";
 
 import styles from "./footer-cart.module.css";
+
+const ShowCart = ({ cartLoading, children }) => {
+  if (cartLoading) {
+    return <></>;
+  }
+
+  return children;
+};
 
 export const FooterCart = () => {
   const navigate = useNavigate();
@@ -22,7 +30,7 @@ export const FooterCart = () => {
 
   useEffect(() => {
     if (authToken && cartIsEmpty) {
-      fetchCart(authToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
+      fetchCartApi(authToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
     }
   }, []);
 
@@ -30,21 +38,27 @@ export const FooterCart = () => {
     navigate("/cart");
   };
 
+  const isCartEmpty = useMemo(() => {
+    if (cart.length === 0) {
+      return <p>В корзине пусто</p>;
+    } else {
+      return (
+        <p>
+          В корзине <span>{cartAmount} </span>
+          {getNoun(cartAmount, "товар", "товара", "товаров")} на <span>{cartTotal}$</span>
+        </p>
+      );
+    }
+  }, [cart, cartAmount, cartTotal]);
+
   return (
-    <>
-      {cartLoading || cartAmount === 0 ? (
-        <></>
-      ) : (
-        <footer className={styles["footer-cart"]}>
-          <div className={styles.content}>
-            <img className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />
-            <p>
-              В корзине <span>{cartAmount} </span>
-              {getNoun(cartAmount, "товар", "товара", "товаров")} на <span>{cartTotal}$</span>
-            </p>
-          </div>
-        </footer>
-      )}
-    </>
+    <ShowCart cartLoading={cartLoading} cartAmount={cartAmount}>
+      <footer className={styles["footer-cart"]}>
+        <div className={styles.content}>
+          <img className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />
+          {isCartEmpty}
+        </div>
+      </footer>
+    </ShowCart>
   );
 };
