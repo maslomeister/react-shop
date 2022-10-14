@@ -1,3 +1,5 @@
+## [Open deployment]("https://maslomeister.github.io/react-shop/)
+
 ### Description
 
 This is small shop website
