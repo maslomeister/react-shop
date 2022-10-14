@@ -153,10 +153,12 @@ export const Product = () => {
   }, []);
 
   useEffect(() => {
-    if (editItemState.description.length >= 0) {
-      validateDescription();
+    if (editItemState.editMode) {
+      if (editItemState.description.length >= 0) {
+        validateDescription();
+      }
     }
-  }, [editItemState.description]);
+  }, [editItemState]);
 
   useEffect(() => {
     if (!authenticated) {
