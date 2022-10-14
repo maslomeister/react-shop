@@ -1,4 +1,4 @@
-# [Open deployment]("https://maslomeister.github.io/react-shop/")
+# [Open deployment](https://maslomeister.github.io/react-shop/)
 
 ### Description
 
