@@ -8,7 +8,7 @@ This is small shop website
 There are two accounts available:
 
 - Customer - `login: Customer, password: qwertycustomer` - this is an **user** account, it can buy products
-- Admin - `login: Admin, password: qwertyadmin` - this is an **admin** account, it can edit product names and descriptions
+- Admin - `login: Admin, password: qwertyadmin` - this is an **admin** account, it can edit product information
 
 ### Local usage
 
