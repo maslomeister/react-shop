@@ -17,7 +17,12 @@
 
 .submenu {
   display: flex;
+  align-items: center;
   gap: 24px;
+}
+
+.username {
+  padding-right: 16px;
 }
 
 .logo {

@@ -8,7 +8,7 @@ import { userLogout } from "../../store/actions/auth";
 import styles from "./navbar.module.css";
 
 export const Navbar = () => {
-  const { authenticated } = useSelector((state) => state.auth);
+  const { authenticated, isUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const onLoginClick = () => {
@@ -28,6 +28,7 @@ export const Navbar = () => {
           <li>
             <NavLink to="/" className={styles.logo}>
               Shoply
+              {authenticated && !isUser && <> - Admin panel</>}
             </NavLink>
           </li>
         </div>
