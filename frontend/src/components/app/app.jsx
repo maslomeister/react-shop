@@ -91,7 +91,7 @@ export const App = () => {
           <Route
             path="/cart"
             element={
-              <ProtectedRoute authenticated={authenticated}>
+              <ProtectedRoute authenticated={authenticated} isUser={isUser}>
                 <Cart showFooter={setShowFooter} />
               </ProtectedRoute>
             }
