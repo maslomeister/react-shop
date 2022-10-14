@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5069/api";
+const API_URL = process.env.NODE_ENV === "development" ? "http://localhost:5069/api" : "https://maslomeister-shop.herokuapp.com/api";
 
 const getData = async (url, minDelay, params) => {
   try {
