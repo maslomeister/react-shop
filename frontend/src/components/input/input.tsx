@@ -11,6 +11,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelColor?: string;
   maxLength?: number;
   error: string;
+  autoComplete?: string;
 }
 
 export const Input = ({
