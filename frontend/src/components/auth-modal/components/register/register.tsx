@@ -123,7 +123,7 @@ export const Register = () => {
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate>
+      <form className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate autoComplete="off">
         <Input
           label="Логин*"
           labelColor="#fff"
