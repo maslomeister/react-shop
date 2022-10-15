@@ -5,7 +5,7 @@ import { Input } from "../../../../components/input/input";
 import styles from "./input-or-price.module.css";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+  value: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: string;
@@ -20,7 +20,7 @@ export const InputOrPice = ({ value, onChange, onBlur, readOnly, error, editMode
         placeholder="Цена"
         label="Цена"
         name="price"
-        value={value}
+        value={value.toString()}
         maxLength={10}
         onChange={onChange}
         onBlur={onBlur}

@@ -192,7 +192,7 @@ export const Product = () => {
                 editMode={editItemState.editMode}
               />
               <InputOrPice
-                value={editItemState.price.toString()}
+                value={editItemState.price}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   changeItemField("price", Number(allowOnlyNumbers(event.target.value)));
                 }}
@@ -202,7 +202,7 @@ export const Product = () => {
                 editMode={editItemState.editMode}
               />
               <InputOrAmount
-                value={editItemState.inStock.toString()}
+                value={editItemState.inStock}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   changeItemField("inStock", Number(allowOnlyNumbers(event.target.value)));
                 }}
