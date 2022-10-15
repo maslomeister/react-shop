@@ -164,10 +164,10 @@ export const deleteProductFromCartApi = async (
 export const loginUserApi = async (
   login: string,
   password: string,
-  dispatch: Dispatch<IAuthUserRequest | IAuthUserSuccess | IAuthUserError>,
-  onRequest: () => IAuthUserRequest,
-  onSuccess: (data: IUserData) => IAuthUserSuccess,
-  onError: (error: string) => IAuthUserError
+  dispatch: Dispatch<ILoginUserRequest | ILoginUserSuccess>,
+  onRequest: () => ILoginUserRequest,
+  onSuccess: (data: IUserData) => ILoginUserSuccess,
+  onError: (error: string) => void
 ) => {
   dispatch(onRequest());
   try {
@@ -182,7 +182,32 @@ export const loginUserApi = async (
       dispatch(onSuccess(data));
     }
   } catch (err) {
-    dispatch(onError(err as string));
+    onError(err as string);
+  }
+};
+
+export const registerUserApi = async (
+  login: string,
+  password: string,
+  dispatch: Dispatch<IRegisterUserRequest | IRegisterUserSuccess>,
+  onRequest: () => IRegisterUserRequest,
+  onSuccess: (data: IUserData) => IRegisterUserSuccess,
+  onError: (error: string) => void
+) => {
+  dispatch(onRequest());
+  try {
+    const data = await getData<IUserData>(API_URL + "/register", 300, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ login, password }),
+    });
+    if (isError(data)) {
+      checkForError(data);
+    } else {
+      dispatch(onSuccess(data));
+    }
+  } catch (err) {
+    onError(err as string);
   }
 };
 

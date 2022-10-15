@@ -1,22 +1,57 @@
-import { AUTH_USER_REQUEST, AUTH_USER_SUCCESS, AUTH_USER_ERROR, AUTH_LOGOUT_USER } from "./action-types/auth";
+import {
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_ERROR,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_ERROR,
+  AUTH_CLEAR_ERROR,
+  AUTH_LOGOUT_USER,
+} from "./action-types/auth";
 
-export function authUserRequest(): IAuthUserRequest {
+export function loginUserRequest(): ILoginUserRequest {
   return {
-    type: AUTH_USER_REQUEST,
+    type: LOGIN_USER_REQUEST,
   };
 }
 
-export function authUserSuccess(data: IUserData): IAuthUserSuccess {
+export function loginUserSuccess(data: IUserData): ILoginUserSuccess {
   return {
-    type: AUTH_USER_SUCCESS,
+    type: LOGIN_USER_SUCCESS,
     payload: { authToken: data.authToken, userRole: data.userRole, name: data.name },
   };
 }
 
-export function authUserError(error: string): IAuthUserError {
+export function loginUserError(error: string): ILoginUserError {
   return {
-    type: AUTH_USER_ERROR,
+    type: LOGIN_USER_ERROR,
     payload: { error },
+  };
+}
+
+export function registerUserRequest(): IRegisterUserRequest {
+  return {
+    type: REGISTER_USER_REQUEST,
+  };
+}
+
+export function registerUserSuccess(data: IUserData): IRegisterUserSuccess {
+  return {
+    type: REGISTER_USER_SUCCESS,
+    payload: { authToken: data.authToken, userRole: data.userRole, name: data.name },
+  };
+}
+
+export function registerUserError(error: string): IRegisterUserError {
+  return {
+    type: REGISTER_USER_ERROR,
+    payload: { error },
+  };
+}
+
+export function authClearError(): IAuthClearError {
+  return {
+    type: AUTH_CLEAR_ERROR,
   };
 }
 

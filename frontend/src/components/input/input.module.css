@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
 .input {
   border-radius: 12px;
   border: solid 1px #3c3c45;
@@ -16,6 +21,12 @@
   padding: 4px 20px 0;
   width: 100%;
   color-scheme: light;
+}
+
+.show-hide {
+  position: absolute;
+  right: 8px;
+  top: 4px;
 }
 
 .input:focus {

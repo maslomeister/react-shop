@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "../../store";
 
 import { fetchCartApi, fetchProductsApi, verifyUserApi } from "../../api/api";
-import { authUserSuccess } from "../../store/actions/auth";
+import { loginUserSuccess } from "../../store/actions/auth";
 import {
   fetchProductsRequest,
   fetchProductsSuccess,
@@ -18,7 +18,7 @@ import { Navbar } from "../navbar/navbar";
 import { Main } from "../../pages/main/main";
 import { About } from "../../pages/about/about";
 import { Product } from "../../pages/product/product";
-import { LoginModal } from "../login-modal/login-modal";
+import { AuthModal } from "../auth-modal/auth-modal";
 import { NotFound } from "../../pages/not-found/not-found";
 import { FooterCart } from "../footer-cart/footer-cart";
 import { Cart } from "../../pages/cart/cart";
@@ -51,7 +51,7 @@ export const App = () => {
           setVerifyUserState((prevState) => {
             return { ...prevState, loading: false };
           });
-          dispatch(authUserSuccess({ authToken: localToken, userRole: data.userRole, name: data.name }));
+          dispatch(loginUserSuccess({ authToken: localToken, userRole: data.userRole, name: data.name }));
           fetchCartApi(localToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
         },
         (err) =>
@@ -99,7 +99,7 @@ export const App = () => {
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {modalIsOpened && <LoginModal />}
+        {modalIsOpened && <AuthModal />}
         {showFooter && authenticated && isUser && <FooterCart />}
       </ShowErrorOrLoading>
     </div>
