@@ -4,7 +4,14 @@ import { Button } from "../../../../components/button/button";
 
 import styles from "./show-authenticated-product.module.css";
 
-export const ShowAuthenticatedProduct = ({ authenticated, isUser, inStock, children }) => {
+interface IProps {
+  authenticated: boolean;
+  isUser: boolean;
+  inStock: number;
+  children: React.ReactNode;
+}
+
+export const ShowAuthenticatedProduct = ({ authenticated, isUser, inStock, children }: IProps) => {
   if (!authenticated) {
     return <p className={styles.text}>Войдите чтобы добавить в корзину</p>;
   }
@@ -13,5 +20,5 @@ export const ShowAuthenticatedProduct = ({ authenticated, isUser, inStock, child
     return <Button inStock={inStock} />;
   }
 
-  return children;
+  return <>{children}</>;
 };

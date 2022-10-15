@@ -7,7 +7,13 @@ import { Button } from "../../../../components/button/button";
 
 import styles from "./cart-amount.module.css";
 
-export const CartAmount = ({ id, inStock, authToken }) => {
+interface IProps {
+  id: string;
+  inStock: number;
+  authToken: string;
+}
+
+export const CartAmount = ({ id, inStock, authToken }: IProps) => {
   const dispatch = useDispatch();
 
   const [addToCartState, setAddToCartState] = useState({
@@ -16,7 +22,7 @@ export const CartAmount = ({ id, inStock, authToken }) => {
   });
   const [cartAmount, setCartAmount] = useState(1);
 
-  const changeAmountToCart = (action) => {
+  const changeAmountToCart = (action: string) => {
     switch (action) {
       case "inc":
         if (inStock - cartAmount > 0) {
@@ -38,7 +44,6 @@ export const CartAmount = ({ id, inStock, authToken }) => {
     addProductToCartApi(
       id,
       authToken,
-      cartAmount,
       () => {
         setAddToCartState((prevState) => {
           return { ...prevState, loading: true };
@@ -62,7 +67,8 @@ export const CartAmount = ({ id, inStock, authToken }) => {
             }),
           1000
         );
-      }
+      },
+      cartAmount
     );
   };
 

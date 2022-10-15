@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { clearCartApi } from "../../api/api";
 import { clearCart } from "../../store/actions/shop";
@@ -9,7 +10,11 @@ import { CartItem } from "../../components/cart-item/cart-item";
 
 import styles from "./cart.module.css";
 
-export const Cart = ({ showFooter }) => {
+interface IProps {
+  showFooter: (value: boolean) => void;
+}
+
+export const Cart = ({ showFooter }: IProps) => {
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
   const { cart, cartLoading, cartTotal } = useSelector((state) => state.shop);

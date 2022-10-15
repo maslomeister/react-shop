@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { addProductToCartApi, deleteProductFromCartApi } from "../../api/api";
 import { addToCart, removeItemFromCart } from "../../store/actions/shop";
@@ -7,7 +8,15 @@ import { Button } from "../button/button";
 
 import styles from "./cart-item.module.css";
 
-export const CartItem = ({ id, name, price, quantity, total }) => {
+interface IProps {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
+export const CartItem = ({ id, name, price, quantity, total }: IProps) => {
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
   const { products } = useSelector((state) => state.shop);
@@ -32,7 +41,7 @@ export const CartItem = ({ id, name, price, quantity, total }) => {
     deleteError: false,
   });
 
-  const changeAmountToCart = (action) => {
+  const changeAmountToCart = (action: string) => {
     switch (action) {
       case "inc":
         changeAmount(1);
@@ -50,11 +59,10 @@ export const CartItem = ({ id, name, price, quantity, total }) => {
     }
   };
 
-  const changeAmount = (amount) => {
+  const changeAmount = (amount: number) => {
     addProductToCartApi(
       id,
       authToken,
-      amount,
       () => {
         setItemState((prevState) => {
           return { ...prevState, amountLoading: true };
@@ -77,7 +85,8 @@ export const CartItem = ({ id, name, price, quantity, total }) => {
             }),
           1000
         );
-      }
+      },
+      amount
     );
   };
 

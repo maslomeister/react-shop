@@ -1,4 +1,4 @@
-export function getNoun(number, one, two, five) {
+export function getNoun(number: number, one: string, two: string, five: string) {
   let n = Math.abs(number);
   n %= 100;
   if (n >= 5 && n <= 20) {
@@ -14,6 +14,6 @@ export function getNoun(number, one, two, five) {
   return five;
 }
 
-export const allowOnlyNumbers = (str) => {
+export const allowOnlyNumbers = (str: string) => {
   return str.trim().replace(/[^0-9]/g, "");
 };

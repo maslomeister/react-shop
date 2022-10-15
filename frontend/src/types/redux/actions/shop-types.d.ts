@@ -54,7 +54,7 @@ interface ICartDataError {
 
 interface IAddToCart {
   type: IShopActionTypes["ADD_TO_CART"];
-  payload: { id: string; quantity: number };
+  payload: { id: string; quantity?: number };
 }
 
 interface IClearCart {

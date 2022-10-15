@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { loginUserApi } from "../../api/api";
 import { authUserRequest, authUserSuccess, authUserError } from "../../store/actions/auth";
-import { Spinner } from "../spinner/spinner.jsx";
+import { Spinner } from "../spinner/spinner";
 import { Button } from "../button/button";
 import { Input } from "../input/input";
 import { toggleModal } from "../../store/actions/shop";
@@ -19,7 +20,7 @@ const emptyFields = {
 };
 
 export function LoginModal() {
-  const { error, authenticated, authLoading, authToken, userRole } = useSelector((state) => state.auth);
+  const { error, authenticated, loading, authToken, userRole } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export function LoginModal() {
   }, [authenticated, authToken, userRole, location.pathname]);
 
   useEffect(() => {
-    const closeOnESC = (e) => {
+    const closeOnESC = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         closeHandler();
       }
@@ -62,17 +63,14 @@ export function LoginModal() {
     };
   }, [closeHandler]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     validateLogin();
     validatePassword();
 
     if (validateLogin() && validatePassword()) {
-      const login = event.currentTarget.elements.login.value.trim();
-      const password = event.currentTarget.elements.password.value.trim();
-
-      loginUserApi(login, password, dispatch, authUserRequest, authUserSuccess, authUserError);
+      loginUserApi(inputValues.login, inputValues.password, dispatch, authUserRequest, authUserSuccess, authUserError);
     }
   };
 
@@ -81,7 +79,7 @@ export function LoginModal() {
     setErrorValues({ ...emptyFields });
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setInputValues({ ...inputValues, [name]: value });
   };
@@ -131,7 +129,7 @@ export function LoginModal() {
   return createPortal(
     <div className={styles["modal-overlay"]} onClick={closeHandler}>
       <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
-        {authLoading ? (
+        {loading ? (
           <div className={styles["spinner-container"]}>
             <Spinner />
           </div>
@@ -162,7 +160,7 @@ export function LoginModal() {
                 onBlur={validatePassword}
               />
               <div className={styles.controls}>
-                <Button type="reset" variant="red" width={160} blocked={true}>
+                <Button type="reset" variant="red" width={160}>
                   Отмена
                 </Button>
                 <Button type="submit" width={160}>
@@ -175,6 +173,6 @@ export function LoginModal() {
         )}
       </div>
     </div>,
-    modalRoot
+    modalRoot!
   );
 }

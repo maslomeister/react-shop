@@ -2,16 +2,28 @@ import React, { useMemo } from "react";
 
 import styles from "./button.module.css";
 
-export const Button = ({ inStock, inactive, variant, width, type, onClick, loading, error, children }) => {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  inStock?: number;
+  inactive?: boolean;
+  variant?: "red" | "error";
+  width?: number;
+  onClick?: () => void;
+  loading?: boolean;
+  error?: boolean;
+}
+
+export const Button = ({ inStock, inactive, variant, width, type, onClick, loading, error, children }: IProps) => {
   const buyButtonText = useMemo(() => {
     if (error) {
       return "ОШИБКА";
     } else if (loading) {
       return "ДОБАВЛЯЕМ";
-    } else if (inStock <= 0) {
-      return "НЕТ В НАЛИЧИИ";
-    } else if (inStock > 0) {
-      return "В КОРЗИНУ";
+    } else if (inStock !== undefined) {
+      if (inStock <= 0) {
+        return "НЕТ В НАЛИЧИИ";
+      } else if (inStock > 0) {
+        return "В КОРЗИНУ";
+      }
     }
   }, [inStock, loading, error]);
 

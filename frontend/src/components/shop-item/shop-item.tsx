@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { Button } from "../button/button";
 import { addToCart } from "../../store/actions/shop";
@@ -8,10 +9,16 @@ import { addProductToCartApi } from "../../api/api";
 
 import styles from "./shop-item.module.css";
 
-const IsUserAndAuthenticated = ({ authenticated, isUser, children }) => {
+interface IUserAndUthenticated {
+  authenticated: boolean;
+  isUser: boolean;
+  children: React.ReactNode;
+}
+
+const IsUserAndAuthenticated = ({ authenticated, isUser, children }: IUserAndUthenticated) => {
   if (authenticated) {
     if (isUser) {
-      return children;
+      return <>{children}</>;
     } else {
       return <></>;
     }
@@ -20,7 +27,15 @@ const IsUserAndAuthenticated = ({ authenticated, isUser, children }) => {
   return <p>Войдите чтобы добавить в корзину</p>;
 };
 
-export const ShopItem = ({ id, img, name, price, inStock }) => {
+interface IProps {
+  id: string;
+  img: string;
+  name: string;
+  price: number;
+  inStock: number;
+}
+
+export const ShopItem = ({ id, img, name, price, inStock }: IProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [addToCartState, setAddToCartState] = useState({
@@ -33,7 +48,6 @@ export const ShopItem = ({ id, img, name, price, inStock }) => {
     addProductToCartApi(
       id,
       authToken,
-      undefined,
       () => {
         setAddToCartState((prevState) => {
           return { ...prevState, loading: true };
@@ -56,7 +70,8 @@ export const ShopItem = ({ id, img, name, price, inStock }) => {
             }),
           1000
         );
-      }
+      },
+      undefined
     );
   };
 

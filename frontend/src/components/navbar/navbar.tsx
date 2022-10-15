@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
+import { ButtonText } from "../button/buttonText";
 import { clearCartLogout, toggleModal } from "../../store/actions/shop";
 import { userLogout } from "../../store/actions/auth";
 
@@ -41,21 +43,18 @@ export const Navbar = () => {
           </li>
           {authenticated ? (
             <li>
-              <NavLink className={styles.link} onClick={onLogoutClick}>
+              <ButtonText className={styles.link} color="ffffffcc" onClick={onLogoutClick}>
                 Выйти
-              </NavLink>
+              </ButtonText>
             </li>
           ) : (
             <li>
-              <NavLink className={styles.link} onClick={onLoginClick}>
+              <ButtonText className={styles.link} color="ffffffcc" onClick={onLoginClick}>
                 Войти
-              </NavLink>
+              </ButtonText>
             </li>
           )}
         </div>
-
-        {/* <Logo /> */}
-        {/* <img src={logo} className="" alt="logo" /> */}
       </ul>
     </header>
   );

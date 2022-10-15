@@ -63,7 +63,7 @@ export function cartDataError(error: string): ICartDataError {
   };
 }
 
-export function addToCart(id: string, quantity: number): IAddToCart {
+export function addToCart(id: string, quantity?: number): IAddToCart {
   return {
     type: ADD_TO_CART,
     payload: { id, quantity },

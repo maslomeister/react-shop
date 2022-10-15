@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { fetchCartApi, fetchProductsApi, verifyUserApi } from "../../api/api";
 import { authUserSuccess } from "../../store/actions/auth";

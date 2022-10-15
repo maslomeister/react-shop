@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 
 import { cartDataError, cartDataRequest, cartDataSuccess, clearProduct } from "../../store/actions/shop";
 import { ShopItem } from "../../components/shop-item/shop-item";

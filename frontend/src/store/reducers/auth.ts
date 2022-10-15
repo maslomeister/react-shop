@@ -26,7 +26,7 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
     case AUTH_USER_REQUEST:
       return {
         ...state,
-        authLoading: true,
+        loading: true,
         error: "",
       };
     case AUTH_USER_SUCCESS:
@@ -38,7 +38,7 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
 
       return {
         ...state,
-        authLoading: false,
+        loading: false,
         authenticated: true,
         authToken: action.payload.authToken,
         userRole: action.payload.userRole,
@@ -48,7 +48,7 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
     case AUTH_USER_ERROR:
       return {
         ...state,
-        authLoading: false,
+        loading: false,
         authenticated: false,
         authToken: "",
         error: action.payload.error,

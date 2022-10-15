@@ -4,7 +4,13 @@ import { Spinner } from "../spinner/spinner";
 
 import styles from "./show-error-or-loading.module.css";
 
-export const ShowErrorOrLoading = ({ error, loading, children }) => {
+interface IProps {
+  error: string;
+  loading: boolean;
+  children: React.ReactNode;
+}
+
+export const ShowErrorOrLoading = ({ error, loading, children }: IProps) => {
   if (error) {
     return (
       <div className={styles.error}>
@@ -21,5 +27,5 @@ export const ShowErrorOrLoading = ({ error, loading, children }) => {
     );
   }
 
-  return children;
+  return <>{children}</>;
 };

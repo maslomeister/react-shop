@@ -115,10 +115,10 @@ export const changeProductInfoApi = async (
 export const addProductToCartApi = async (
   productId: string,
   authToken: string,
-  quantity: number,
   onRequest: () => void,
   onSuccess: (data: IProduct) => void,
-  onError: (err: string) => void
+  onError: (err: string) => void,
+  quantity?: number
 ) => {
   onRequest();
   try {

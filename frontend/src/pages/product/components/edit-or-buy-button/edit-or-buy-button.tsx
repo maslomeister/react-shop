@@ -4,6 +4,18 @@ import { Button } from "../../../../components/button/button";
 
 import styles from "./edit-or-buy-button.module.css";
 
+interface IProps {
+  isUser: boolean;
+  editMode: boolean;
+  setEditMode: (val: boolean) => void;
+  onSave: () => void;
+  onSaveLoading: boolean;
+  onSaveError: string;
+  finalError: string;
+  resetEditItemState: () => void;
+  children: React.ReactNode;
+}
+
 export const EditOrBuyButton = ({
   isUser,
   editMode,
@@ -14,8 +26,8 @@ export const EditOrBuyButton = ({
   finalError,
   resetEditItemState,
   children,
-}) => {
-  const setEditModeHandler = (mode) => {
+}: IProps) => {
+  const setEditModeHandler = (mode: boolean) => {
     if (mode) {
       setEditMode(mode);
     } else {
@@ -40,7 +52,7 @@ export const EditOrBuyButton = ({
             <Button variant="red" onClick={resetEditItemState}>
               Отмена
             </Button>
-            <Button loading={onSaveLoading} error={error} onClick={onSave}>
+            <Button loading={onSaveLoading} error={onSaveError ? true : false} onClick={onSave}>
               Сохранить
             </Button>
           </div>
@@ -56,5 +68,5 @@ export const EditOrBuyButton = ({
     }
   }
 
-  return children;
+  return <>{children}</>;
 };

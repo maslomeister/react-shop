@@ -4,7 +4,15 @@ import { TextArea } from "../../../../components/text-area/text-area";
 
 import styles from "./text-area-or-description.module.css";
 
-export const TextAreaOrDescription = ({ value, onChange, readOnly, error, editMode }) => {
+interface IProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  value: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  error: string;
+  editMode: boolean;
+}
+
+export const TextAreaOrDescription = ({ value, onChange, readOnly, error, editMode }: IProps) => {
   if (editMode) {
     return (
       <TextArea

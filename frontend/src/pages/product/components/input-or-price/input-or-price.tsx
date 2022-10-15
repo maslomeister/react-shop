@@ -4,7 +4,15 @@ import { Input } from "../../../../components/input/input";
 
 import styles from "./input-or-price.module.css";
 
-export const InputOrPice = ({ value, onChange, onBlur, readOnly, error, editMode }) => {
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
+  editMode: boolean;
+}
+
+export const InputOrPice = ({ value, onChange, onBlur, readOnly, error, editMode }: IProps) => {
   if (editMode) {
     return (
       <Input

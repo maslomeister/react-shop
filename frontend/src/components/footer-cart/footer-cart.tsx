@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 import { fetchCartApi } from "../../api/api";
@@ -10,12 +11,12 @@ import cartIcon from "../../icons/cart.svg";
 
 import styles from "./footer-cart.module.css";
 
-const ShowCart = ({ cartLoading, children }) => {
+const ShowCart = ({ cartLoading, children }: { cartLoading: boolean; children: React.ReactNode }) => {
   if (cartLoading) {
     return <></>;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export const FooterCart = () => {
@@ -52,7 +53,7 @@ export const FooterCart = () => {
   }, [cart, cartAmount, cartTotal]);
 
   return (
-    <ShowCart cartLoading={cartLoading} cartAmount={cartAmount}>
+    <ShowCart cartLoading={cartLoading}>
       <footer className={styles["footer-cart"]}>
         <div className={styles.content}>
           <img className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />

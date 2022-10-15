@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store";
 import { useParams } from "react-router-dom";
 
 import { changeProductInfoApi, fetchProductApi } from "../../api/api";
@@ -33,7 +34,7 @@ export const Product = () => {
     inStock: 0,
   });
 
-  const changeItemField = (field, value) => {
+  const changeItemField = (field: string, value: string | number) => {
     setEditItemState((prevState) => {
       return { ...prevState, [field]: value };
     });
@@ -43,7 +44,7 @@ export const Product = () => {
     ...errorsDefault,
   });
 
-  const changeItemErrorField = (field, value) => {
+  const changeItemErrorField = (field: string, value: string) => {
     setEditItemErrors((prevState) => {
       return { ...prevState, [field]: value };
     });
@@ -92,7 +93,7 @@ export const Product = () => {
     }
   };
 
-  const validatePrice = (event) => {
+  const validatePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
     const price = event.target.value;
     if (price === "0") {
       changeItemErrorField("price", "Цена не может быть 0");
@@ -121,7 +122,7 @@ export const Product = () => {
       inStock: editItemState.inStock,
     };
     changeProductInfoApi(
-      id,
+      id!,
       authToken,
       product,
       () => {
@@ -133,7 +134,7 @@ export const Product = () => {
         setChangeProductState((prevState) => {
           return { ...prevState, loading: false };
         });
-        dispatch(changeProductData(id, product));
+        dispatch(changeProductData(id!, product));
       },
       (err) => {
         setChangeProductState((prevState) => {
@@ -149,7 +150,7 @@ export const Product = () => {
   };
 
   useEffect(() => {
-    fetchProductApi(id, dispatch, fetchProductRequest, fetchProductSuccess, fetchProductError);
+    fetchProductApi(id!, dispatch, fetchProductRequest, fetchProductSuccess, fetchProductError);
   }, []);
 
   useEffect(() => {
@@ -184,15 +185,15 @@ export const Product = () => {
             <div className={styles["name-price"]}>
               <InputOrTitle
                 value={editItemState.name}
-                onChange={(event) => changeItemField("name", event.target.value)}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => changeItemField("name", event.target.value)}
                 error={editItemErrors.name}
                 onBlur={validateName}
                 readOnly={changeProductState.loading}
                 editMode={editItemState.editMode}
               />
               <InputOrPice
-                value={editItemState.price}
-                onChange={(event) => {
+                value={editItemState.price.toString()}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   changeItemField("price", Number(allowOnlyNumbers(event.target.value)));
                 }}
                 error={editItemErrors.price}
@@ -201,8 +202,8 @@ export const Product = () => {
                 editMode={editItemState.editMode}
               />
               <InputOrAmount
-                value={editItemState.inStock}
-                onChange={(event) => {
+                value={editItemState.inStock.toString()}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   changeItemField("inStock", Number(allowOnlyNumbers(event.target.value)));
                 }}
                 error={editItemErrors.inStock}
@@ -213,7 +214,7 @@ export const Product = () => {
                 <EditOrBuyButton
                   isUser={isUser}
                   editMode={editItemState.editMode}
-                  setEditMode={(mode) =>
+                  setEditMode={(mode: boolean) =>
                     setEditItemState((prevState) => {
                       return { ...prevState, editMode: mode };
                     })
@@ -224,14 +225,14 @@ export const Product = () => {
                   onSaveError={changeProductState.error}
                   finalError={inputsError}
                 >
-                  <CartAmount id={id} inStock={product.inStock} authToken={authToken} />
+                  <CartAmount id={id!} inStock={product.inStock} authToken={authToken} />
                 </EditOrBuyButton>
               </ShowAuthenticatedProduct>
             </div>
           </div>
           <TextAreaOrDescription
             value={editItemState.description}
-            onChange={(event) =>
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
               setEditItemState((prevState) => {
                 return { ...prevState, description: event.target.value };
               })

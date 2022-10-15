@@ -2,7 +2,28 @@ import React from "react";
 
 import styles from "./input.module.css";
 
-export const Input = ({ type, placeholder, name, value, label, labelColor, maxLength, onChange, onBlur, onFocus, error, readOnly }) => {
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+  label?: string;
+  labelColor?: string;
+  maxLength?: number;
+  error: string;
+}
+
+export const Input = ({
+  type,
+  placeholder,
+  name,
+  value,
+  label,
+  labelColor,
+  maxLength,
+  onChange,
+  onBlur,
+  onFocus,
+  error,
+  readOnly,
+}: IProps) => {
   return (
     <div className={styles["input-container"]}>
       {label && (

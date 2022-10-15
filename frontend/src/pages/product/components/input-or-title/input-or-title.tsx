@@ -2,7 +2,15 @@ import React from "react";
 
 import { Input } from "../../../../components/input/input";
 
-export const InputOrTitle = ({ value, onChange, onBlur, readOnly, error, editMode }) => {
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
+  editMode: boolean;
+}
+
+export const InputOrTitle = ({ value, onChange, onBlur, readOnly, error, editMode }: IProps) => {
   if (editMode) {
     return (
       <Input
