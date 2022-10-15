@@ -20,6 +20,14 @@
   margin-bottom: 64px;
 }
 
+@media screen and (max-width: 767px) {
+  .container {
+    width: 700px;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (min-width: 760px) {
   .container {
     width: 760px;

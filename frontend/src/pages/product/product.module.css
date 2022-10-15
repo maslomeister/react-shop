@@ -47,3 +47,23 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .data {
+    width: 100%;
+  }
+
+  .main-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .name-price {
+    min-width: 0;
+    width: 100%;
+  }
+}
