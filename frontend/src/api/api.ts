@@ -141,12 +141,12 @@ export const deleteProductFromCartApi = async (
   productId: string,
   authToken: string,
   onRequest: () => void,
-  onSuccess: (data: {}) => void,
+  onSuccess: (data: Record<string, never>) => void,
   onError: (err: string) => void
 ) => {
   onRequest();
   try {
-    const data = await getData<{}>(API_URL + "/cart", 500, {
+    const data = await getData<Record<string, never>>(API_URL + "/cart", 500, {
       method: "DELETE",
       headers: { Authorization: authToken, "Content-Type": "application/json" },
       body: JSON.stringify({ productId }),

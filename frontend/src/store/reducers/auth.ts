@@ -22,7 +22,7 @@ interface IInitialState {
   registerError: string;
 }
 
-let initialState = {
+const initialState = {
   loginLoading: false,
   registerLoading: false,
   authenticated: false,

@@ -34,7 +34,7 @@ interface IInitialState {
   productLoading: boolean;
 }
 
-let initialState = {
+const initialState = {
   productsLoading: false,
   products: [] as IProduct[],
   productsError: "",
@@ -104,7 +104,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         cartLoading: true,
         cartError: "",
       };
-    case FETCH_CART_SUCCESS:
+    case FETCH_CART_SUCCESS: {
       const totalPrice = action.payload.cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
       return {
         ...state,
@@ -113,6 +113,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         cartTotal: totalPrice,
         cartIsEmpty: false,
       };
+    }
     case FETCH_CART_ERROR:
       return {
         ...state,
@@ -175,7 +176,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         ...state,
         cart: [],
       };
-    case CLEAR_CART:
+    case CLEAR_CART: {
       const products = [...state.products];
       const cart = [...state.cart];
 
@@ -189,6 +190,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         cart: [],
         products,
       };
+    }
     case CHANGE_PRODUCT_INFO: {
       const products = [...state.products];
       const productIndex = products.findIndex((item) => item.id === action.payload.id);
