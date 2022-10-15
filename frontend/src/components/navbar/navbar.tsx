@@ -30,7 +30,7 @@ export const Navbar = () => {
           <li>
             <NavLink to="/" className={styles.logo}>
               Shoply
-              {authenticated && !isUser && <> - Admin panel</>}
+              {authenticated && !isUser && <p>&nbsp;&nbsp;Admin panel</p>}
             </NavLink>
           </li>
         </div>
