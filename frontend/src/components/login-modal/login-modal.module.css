@@ -20,7 +20,7 @@
   box-sizing: border-box;
   border-radius: 40px;
   width: 600px;
-  height: 400px;
+  height: 360px;
   align-items: start;
   cursor: auto;
 }
@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 64px 48px;
+  padding: 64px 48px 16px 48px;
 }
 
 .controls {
