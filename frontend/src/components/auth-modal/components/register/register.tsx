@@ -134,6 +134,7 @@ export const Register = () => {
           onChange={handleInputChange}
           error={errorValues.login}
           onBlur={validateLogin}
+          autoComplete="off"
         />
         <Input
           label="Пароль*"
@@ -145,6 +146,7 @@ export const Register = () => {
           onChange={handleInputChange}
           error={errorValues.password}
           onBlur={validatePassword}
+          autoComplete="off"
         />
         <Input
           label="Повторите пароль*"
@@ -156,6 +158,7 @@ export const Register = () => {
           onChange={handleInputChange}
           error={errorValues.repeatPassword}
           onBlur={validateRepeatPassword}
+          autoComplete="off"
         />
         <div className={styles.controls}>
           <Button type="reset" variant="red" width={160}>

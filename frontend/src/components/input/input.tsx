@@ -25,6 +25,7 @@ export const Input = ({
   onBlur,
   onFocus,
   error,
+  autoComplete,
   readOnly,
 }: IProps) => {
   const [showPass, setShowPass] = useState(false);
@@ -68,6 +69,7 @@ export const Input = ({
           name={name}
           maxLength={maxLength}
           readOnly={readOnly}
+          autoComplete={autoComplete}
         />
         {showToggle && <img className={styles["show-hide"]} src={showPass ? hideIcon : showIcon} alt="eye" onClick={toggleShowPass} />}
       </div>
