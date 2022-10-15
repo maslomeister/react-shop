@@ -6,12 +6,12 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
-import rootReducer from "./store";
+import { rootReducer } from "./store";
 
 import "./index.css";
 
 const store = createStore(rootReducer, composeWithDevTools());
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
   <React.StrictMode>

@@ -1,4 +1,15 @@
-import { AUTH_USER_REQUEST, AUTH_USER_SUCCESS, AUTH_USER_ERROR, AUTH_USER_RESET, LOGOUT_USER } from "../actions/action-types/auth";
+import { AUTH_USER_REQUEST, AUTH_USER_SUCCESS, AUTH_USER_ERROR, AUTH_LOGOUT_USER } from "../actions/action-types/auth";
+import { Reducer } from "redux";
+
+interface IInitialState {
+  loading: boolean;
+  authenticated: boolean;
+  userRole: string;
+  isUser: boolean;
+  userName: string;
+  authToken: string;
+  error: string;
+}
 
 let initialState = {
   loading: false,
@@ -10,7 +21,7 @@ let initialState = {
   error: "",
 };
 
-function reducer(state = initialState, action) {
+const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_USER_REQUEST:
       return {
@@ -42,21 +53,21 @@ function reducer(state = initialState, action) {
         authToken: "",
         error: action.payload.error,
       };
-    case LOGOUT_USER:
+    case AUTH_LOGOUT_USER:
       return {
         ...state,
         authenticated: false,
         authToken: "",
       };
-    case AUTH_USER_RESET:
-      return {
-        ...state,
-        authLoading: false,
-        error: "",
-      };
+    // case AUTH_USER_RESET:
+    //   return {
+    //     ...state,
+    //     authLoading: false,
+    //     error: "",
+    //   };
     default:
       return state;
   }
-}
+};
 
 export default reducer;

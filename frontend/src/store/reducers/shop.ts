@@ -1,3 +1,5 @@
+import { Reducer } from "redux";
+
 import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
@@ -17,21 +19,37 @@ import {
   REMOVE_ITEM_FROM_CART,
 } from "../actions/action-types/shop";
 
+interface IInitialState {
+  productsLoading: boolean;
+  products: IProduct[];
+  productsError: string;
+  cartLoading: boolean;
+  cart: ICartProduct[];
+  modalIsOpened: boolean;
+  cartIsEmpty: boolean;
+  cartError: string;
+  cartTotal: number;
+  product: IProduct;
+  productError: string;
+  productLoading: boolean;
+}
+
 let initialState = {
   productsLoading: false,
-  products: [],
+  products: [] as IProduct[],
   productsError: "",
   cartLoading: false,
-  cart: [],
+  cart: [] as ICartProduct[],
+  modalIsOpened: false,
   cartIsEmpty: true,
   cartError: "",
   cartTotal: 0,
-  product: {},
+  product: {} as IProduct,
   productError: "",
   productLoading: true,
 };
 
-function reducer(state = initialState, action) {
+const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
       return {
@@ -73,7 +91,7 @@ function reducer(state = initialState, action) {
     case CLEAR_PRODUCT:
       return {
         ...state,
-        product: {},
+        product: {} as IProduct,
       };
     case TOGGLE_LOGIN_MODAL:
       return {
@@ -84,7 +102,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         cartLoading: true,
-        cartError: null,
+        cartError: "",
       };
     case FETCH_CART_SUCCESS:
       const totalPrice = action.payload.cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
@@ -216,6 +234,6 @@ function reducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
 
 export default reducer;

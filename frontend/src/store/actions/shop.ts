@@ -17,106 +17,106 @@ import {
   REMOVE_ITEM_FROM_CART,
 } from "./action-types/shop";
 
-export function fetchProductsRequest() {
+export function fetchProductsRequest(): IFetchProductsRequest {
   return {
     type: FETCH_PRODUCTS_REQUEST,
   };
 }
 
-export function fetchProductsSuccess(products) {
+export function fetchProductsSuccess(products: IProduct[]): IFetchProductsSuccess {
   return {
     type: FETCH_PRODUCTS_SUCCESS,
     payload: { products },
   };
 }
 
-export function fetchProductsError(error) {
+export function fetchProductsError(error: string): IFetchProductsError {
   return {
     type: FETCH_PRODUCTS_ERROR,
     payload: { error },
   };
 }
 
-export function toggleModal() {
+export function toggleModal(): IToggleModal {
   return {
     type: TOGGLE_LOGIN_MODAL,
   };
 }
 
-export function cartDataRequest() {
+export function cartDataRequest(): ICartDataRequest {
   return {
     type: FETCH_CART_REQUEST,
   };
 }
 
-export function cartDataSuccess(cart) {
+export function cartDataSuccess(cart: ICartProduct[]): ICartDataSuccess {
   return {
     type: FETCH_CART_SUCCESS,
     payload: { cart },
   };
 }
 
-export function cartDataError(error) {
+export function cartDataError(error: string): ICartDataError {
   return {
     type: FETCH_CART_ERROR,
     payload: { error },
   };
 }
 
-export function addToCart(id, quantity) {
+export function addToCart(id: string, quantity: number): IAddToCart {
   return {
     type: ADD_TO_CART,
     payload: { id, quantity },
   };
 }
 
-export function clearCart() {
+export function clearCart(): IClearCart {
   return {
     type: CLEAR_CART,
   };
 }
 
-export function clearCartLogout() {
+export function clearCartLogout(): IClearCartLogout {
   return {
     type: CLEAR_CART_LOGOUT,
   };
 }
 
-export function removeItemFromCart(id) {
+export function removeItemFromCart(id: string): IRemoveItemFromCart {
   return {
     type: REMOVE_ITEM_FROM_CART,
     payload: { id },
   };
 }
 
-export function fetchProductRequest() {
+export function fetchProductRequest(): IFetchProductRequest {
   return {
     type: FETCH_PRODUCT_REQUEST,
   };
 }
 
-export function fetchProductSuccess(product) {
+export function fetchProductSuccess(product: IProduct): IFetchProductSuccess {
   return {
     type: FETCH_PRODUCT_SUCCESS,
     payload: { product },
   };
 }
 
-export function fetchProductError(error) {
+export function fetchProductError(error: string): IFetchProductError {
   return {
     type: FETCH_PRODUCT_ERROR,
     payload: { error },
   };
 }
 
-export function changeProductData(id, data) {
+export function changeProductData(id: string, data: IProductData): IChangeProductData {
   return {
     type: CHANGE_PRODUCT_INFO,
     payload: { id, data },
   };
 }
 
-export function clearProduct() {
+export function clearProduct(): IClearProduct {
   return {
     type: CLEAR_PRODUCT,
   };
