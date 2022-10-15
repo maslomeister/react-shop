@@ -54,10 +54,15 @@ export const App = () => {
           dispatch(loginUserSuccess({ authToken: localToken, userRole: data.userRole, name: data.name }));
           fetchCartApi(localToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
         },
-        (err) =>
-          setVerifyUserState((prevState) => {
-            return { ...prevState, loading: false, error: err };
-          })
+        (err) => {
+          if (err === "Неверный токен") {
+            localStorage.removeItem("authToken");
+          } else {
+            setVerifyUserState((prevState) => {
+              return { ...prevState, loading: false, error: err };
+            });
+          }
+        }
       );
     } else {
       setVerifyUserState((prevState) => {
