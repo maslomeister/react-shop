@@ -11,9 +11,9 @@ import { Input } from "../../../input/input";
 import styles from "./register.module.css";
 
 const emptyFields = {
-  login: "",
-  password: "",
-  repeatPassword: "",
+  register_login: "",
+  register_password: "",
+  register_repeatPassword: "",
 };
 
 export const Register = () => {
@@ -36,10 +36,17 @@ export const Register = () => {
     validatePassword();
 
     if (validateLogin() && validatePassword() && comparePasswords()) {
-      registerUserApi(inputValues.login, inputValues.password, dispatch, registerUserRequest, registerUserSuccess, (error) => {
-        dispatch(registerUserError(error));
-        setTimeout(() => dispatch(authClearError()), 1500);
-      });
+      registerUserApi(
+        inputValues.register_login,
+        inputValues.register_password,
+        dispatch,
+        registerUserRequest,
+        registerUserSuccess,
+        (error) => {
+          dispatch(registerUserError(error));
+          setTimeout(() => dispatch(authClearError()), 1500);
+        }
+      );
     }
   };
 
@@ -54,55 +61,55 @@ export const Register = () => {
   };
 
   const validateLogin = () => {
-    const login = inputValues.login.trim();
+    const login = inputValues.register_login.trim();
 
     if (login.length === 0) {
       setErrorValues((prevValue) => {
-        return { ...prevValue, login: "Поле пустое. Заполните пожалуйста" };
+        return { ...prevValue, register_login: "Поле пустое. Заполните пожалуйста" };
       });
       return false;
     } else {
       setErrorValues((prevValue) => {
-        return { ...prevValue, login: "" };
+        return { ...prevValue, register_login: "" };
       });
       return true;
     }
   };
 
   const validatePassword = () => {
-    const password = inputValues.password.trim();
+    const password = inputValues.register_password.trim();
 
     if (password.length === 0) {
       setErrorValues((prevValue) => {
-        return { ...prevValue, password: "Поле пустое. Заполните пожалуйста" };
+        return { ...prevValue, register_password: "Поле пустое. Заполните пожалуйста" };
       });
       return false;
     } else {
       setErrorValues((prevValue) => {
-        return { ...prevValue, password: "" };
+        return { ...prevValue, register_password: "" };
       });
       return true;
     }
   };
 
   const validateRepeatPassword = () => {
-    const repeatPassword = inputValues.repeatPassword.trim();
+    const repeatPassword = inputValues.register_repeatPassword.trim();
 
     if (repeatPassword.length === 0) {
       setErrorValues((prevValue) => {
-        return { ...prevValue, repeatPassword: "Поле пустое. Заполните пожалуйста" };
+        return { ...prevValue, register_repeatPassword: "Поле пустое. Заполните пожалуйста" };
       });
       return false;
     } else {
       setErrorValues((prevValue) => {
-        return { ...prevValue, repeatPassword: "" };
+        return { ...prevValue, register_repeatPassword: "" };
       });
       return true;
     }
   };
 
   const comparePasswords = () => {
-    if (inputValues.password === inputValues.repeatPassword) {
+    if (inputValues.register_password === inputValues.register_repeatPassword) {
       return true;
     }
 
@@ -128,11 +135,11 @@ export const Register = () => {
           label="Логин*"
           labelColor="#fff"
           type="text"
-          name="login"
+          name="register_login"
           placeholder="Логин"
-          value={inputValues.login}
+          value={inputValues.register_login}
           onChange={handleInputChange}
-          error={errorValues.login}
+          error={errorValues.register_login}
           onBlur={validateLogin}
           autoComplete="off"
         />
@@ -140,11 +147,11 @@ export const Register = () => {
           label="Пароль*"
           labelColor="#fff"
           type="password"
-          name="password"
+          name="register_password"
           placeholder="Пароль"
-          value={inputValues.password}
+          value={inputValues.register_password}
           onChange={handleInputChange}
-          error={errorValues.password}
+          error={errorValues.register_password}
           onBlur={validatePassword}
           autoComplete="off"
         />
@@ -152,11 +159,11 @@ export const Register = () => {
           label="Повторите пароль*"
           labelColor="#fff"
           type="password"
-          name="repeatPassword"
+          name="register_repeatPassword"
           placeholder="Повторите пароль"
-          value={inputValues.repeatPassword}
+          value={inputValues.register_repeatPassword}
           onChange={handleInputChange}
-          error={errorValues.repeatPassword}
+          error={errorValues.register_repeatPassword}
           onBlur={validateRepeatPassword}
           autoComplete="off"
         />
