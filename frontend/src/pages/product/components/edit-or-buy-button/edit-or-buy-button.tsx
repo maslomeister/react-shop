@@ -56,7 +56,7 @@ export const EditOrBuyButton = ({
               Сохранить
             </Button>
           </div>
-          <label className={styles["edit-error"]}>{finalError}</label>
+          <label className={styles["edit-error"]}>{error}</label>
         </div>
       );
     } else {
