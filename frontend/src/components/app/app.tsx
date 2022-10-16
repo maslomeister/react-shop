@@ -56,6 +56,9 @@ export const App = () => {
         },
         (err) => {
           if (err === "Неверный токен") {
+            setVerifyUserState((prevState) => {
+              return { ...prevState, loading: false };
+            });
             localStorage.removeItem("authToken");
           } else {
             setVerifyUserState((prevState) => {
