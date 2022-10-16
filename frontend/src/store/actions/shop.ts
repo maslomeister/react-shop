@@ -7,7 +7,7 @@ import {
   FETCH_PRODUCT_ERROR,
   CHANGE_PRODUCT_INFO,
   CLEAR_PRODUCT,
-  TOGGLE_LOGIN_MODAL,
+  TOGGLE_AUTH_MODAL,
   FETCH_CART_REQUEST,
   FETCH_CART_SUCCESS,
   FETCH_CART_ERROR,
@@ -15,6 +15,7 @@ import {
   CLEAR_CART,
   CLEAR_CART_LOGOUT,
   REMOVE_ITEM_FROM_CART,
+  SHOP_RESET_STATE,
 } from "./action-types/shop";
 
 export function fetchProductsRequest(): IFetchProductsRequest {
@@ -39,7 +40,7 @@ export function fetchProductsError(error: string): IFetchProductsError {
 
 export function toggleModal(): IToggleModal {
   return {
-    type: TOGGLE_LOGIN_MODAL,
+    type: TOGGLE_AUTH_MODAL,
   };
 }
 
@@ -119,5 +120,11 @@ export function changeProductData(id: string, data: IProductData): IChangeProduc
 export function clearProduct(): IClearProduct {
   return {
     type: CLEAR_PRODUCT,
+  };
+}
+
+export function shopResetState(): IShopResetState {
+  return {
+    type: SHOP_RESET_STATE,
   };
 }

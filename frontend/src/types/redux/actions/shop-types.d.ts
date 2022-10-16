@@ -9,7 +9,7 @@ interface IShopActionTypes {
   CHANGE_PRODUCT_INFO: "CHANGE_PRODUCT_INFO";
   CLEAR_PRODUCT: "CLEAR_PRODUCT";
 
-  TOGGLE_LOGIN_MODAL: "TOGGLE_LOGIN_MODAL";
+  TOGGLE_AUTH_MODAL: "TOGGLE_AUTH_MODAL";
 
   FETCH_CART_REQUEST: "FETCH_CART_REQUEST";
   FETCH_CART_SUCCESS: "FETCH_CART_SUCCESS";
@@ -18,6 +18,8 @@ interface IShopActionTypes {
   CLEAR_CART: "CLEAR_CART";
   CLEAR_CART_LOGOUT: "CLEAR_CART_LOGOUT";
   REMOVE_ITEM_FROM_CART: "REMOVE_ITEM_FROM_CART";
+
+  SHOP_RESET_STATE: "SHOP_RESET_STATE";
 }
 
 interface IFetchProductsRequest {
@@ -35,7 +37,7 @@ interface IFetchProductsError {
 }
 
 interface IToggleModal {
-  type: IShopActionTypes["TOGGLE_LOGIN_MODAL"];
+  type: IShopActionTypes["TOGGLE_AUTH_MODAL"];
 }
 
 interface ICartDataRequest {
@@ -93,7 +95,12 @@ interface IClearProduct {
   type: IShopActionTypes["CLEAR_PRODUCT"];
 }
 
+interface IShopResetState {
+  type: IShopActionTypes["SHOP_RESET_STATE"];
+}
+
 type TShopActions =
+  | { type: Record<string, never> }
   | IFetchProductsRequest
   | IFetchProductsSuccess
   | IFetchProductsError
@@ -109,4 +116,5 @@ type TShopActions =
   | IFetchProductSuccess
   | IFetchProductError
   | IChangeProductData
-  | IClearProduct;
+  | IClearProduct
+  | IShopResetState;

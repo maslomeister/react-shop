@@ -9,7 +9,7 @@ import {
   FETCH_PRODUCT_ERROR,
   CHANGE_PRODUCT_INFO,
   CLEAR_PRODUCT,
-  TOGGLE_LOGIN_MODAL,
+  TOGGLE_AUTH_MODAL,
   FETCH_CART_REQUEST,
   FETCH_CART_SUCCESS,
   FETCH_CART_ERROR,
@@ -17,6 +17,7 @@ import {
   CLEAR_CART,
   CLEAR_CART_LOGOUT,
   REMOVE_ITEM_FROM_CART,
+  SHOP_RESET_STATE,
 } from "../actions/action-types/shop";
 
 interface IInitialState {
@@ -34,7 +35,7 @@ interface IInitialState {
   productLoading: boolean;
 }
 
-const initialState = {
+export const shopInitialState = {
   productsLoading: false,
   products: [] as IProduct[],
   productsError: "",
@@ -49,7 +50,7 @@ const initialState = {
   productLoading: true,
 };
 
-const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, action) => {
+export const shopReducer: Reducer<IInitialState, TShopActions> = (state = shopInitialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
       return {
@@ -93,7 +94,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         ...state,
         product: {} as IProduct,
       };
-    case TOGGLE_LOGIN_MODAL:
+    case TOGGLE_AUTH_MODAL:
       return {
         ...state,
         modalIsOpened: !state.modalIsOpened,
@@ -105,12 +106,12 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
         cartError: "",
       };
     case FETCH_CART_SUCCESS: {
-      const totalPrice = action.payload.cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
+      const cartTotal = action.payload.cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
       return {
         ...state,
         cartLoading: false,
         cart: action.payload.cart,
-        cartTotal: totalPrice,
+        cartTotal,
         cartIsEmpty: false,
       };
     }
@@ -145,7 +146,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
           products[productIndex].inStock -= quantity ?? 1;
         }
 
-        const total = cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
+        const cartTotal = cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
 
         const isEmpty = Object.keys(state.product).length === 0;
         if (!isEmpty) {
@@ -155,7 +156,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
             ...state,
             cart: cart,
             products: products,
-            cartTotal: total,
+            cartTotal,
             product: product,
           };
         }
@@ -164,7 +165,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
           ...state,
           cart: cart,
           products: products,
-          cartTotal: total,
+          cartTotal,
         };
       }
       return {
@@ -175,6 +176,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
       return {
         ...state,
         cart: [],
+        cartTotal: 0,
       };
     case CLEAR_CART: {
       const products = [...state.products];
@@ -188,6 +190,7 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
       return {
         ...state,
         cart: [],
+        cartTotal: 0,
         products,
       };
     }
@@ -218,7 +221,12 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
 
       const cartIndex = cart.findIndex((item) => item.id === itemId);
 
+      const products = [...state.products];
+
+      const productIndex = products.findIndex((product) => product.id === itemId);
+
       if (cartIndex > -1) {
+        products[productIndex].inStock += cart[cartIndex].quantity;
         cart.splice(cartIndex, 1);
         const total = cart.reduce((previousValue, product) => previousValue + product.totalPrice, 0);
 
@@ -226,16 +234,17 @@ const reducer: Reducer<IInitialState, TShopActions> = (state = initialState, act
           ...state,
           cart: cart,
           cartTotal: total,
+          products,
         };
       }
-
       return {
         ...state,
       };
+    }
+    case SHOP_RESET_STATE: {
+      return shopInitialState;
     }
     default:
       return state;
   }
 };
-
-export default reducer;
