@@ -12,6 +12,8 @@ There are two accounts available:
 - Customer - `login: Customer, password: qwertycustomer` - this is an **user** account, it can buy products
 - Admin - `login: Admin, password: qwertyadmin` - this is an **admin** account, it can edit product information
 
+**You can aslo register new user accounts**
+
 ### Local usage
 
 1. Go to backend folder
