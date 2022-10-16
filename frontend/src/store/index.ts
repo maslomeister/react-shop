@@ -1,12 +1,17 @@
 import { combineReducers } from "redux";
+import { createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { useSelector as useReduxSelector, TypedUseSelectorHook } from "react-redux";
-import auth from "./reducers/auth";
-import shop from "./reducers/shop";
+
+import { authReducer as auth } from "./reducers/auth";
+import { shopReducer as shop } from "./reducers/shop";
+
+export const rootReducer = combineReducers({
+  auth,
+  shop,
+});
 
 type RootState = ReturnType<typeof rootReducer>;
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
-export const rootReducer = combineReducers({
-  shop,
-  auth,
-});
+export const store = createStore(rootReducer, composeWithDevTools());
