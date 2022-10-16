@@ -24,6 +24,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "prettier:check": "prettier --config .prettierrc.json --check \"src/**/*.{js,ts,css,scss,html}\"",
+		"eslint:check": "eslint --config .eslintrc.json --fix \"src/**/*.{tsx,ts,js}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
