@@ -7,6 +7,7 @@ interface IAuthActionTypes {
   REGISTER_USER_ERROR: "REGISTER_USER_ERROR";
   AUTH_CLEAR_ERROR: "AUTH_CLEAR_ERROR";
   AUTH_LOGOUT_USER: "LOGOUT_USER";
+  AUTH_RESET_STATE: "AUTH_RESET_STATE";
 }
 
 interface ILoginUserRequest {
@@ -45,7 +46,12 @@ interface IAuthUserLogout {
   type: IAuthActionTypes["AUTH_LOGOUT_USER"];
 }
 
+interface IAuthResetState {
+  type: IAuthActionTypes["AUTH_RESET_STATE"];
+}
+
 type TAuthActions =
+  | { type: Record<string, never> }
   | ILoginUserRequest
   | ILoginUserSuccess
   | ILoginUserError
@@ -53,4 +59,5 @@ type TAuthActions =
   | IAuthClearError
   | IRegisterUserRequest
   | IRegisterUserSuccess
-  | IRegisterUserError;
+  | IRegisterUserError
+  | IAuthResetState;

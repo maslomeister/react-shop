@@ -7,6 +7,7 @@ import {
   REGISTER_USER_ERROR,
   AUTH_CLEAR_ERROR,
   AUTH_LOGOUT_USER,
+  AUTH_RESET_STATE,
 } from "../actions/action-types/auth";
 import { Reducer } from "redux";
 
@@ -22,7 +23,7 @@ interface IInitialState {
   registerError: string;
 }
 
-const initialState = {
+export const authInitialState = {
   loginLoading: false,
   registerLoading: false,
   authenticated: false,
@@ -34,7 +35,7 @@ const initialState = {
   registerError: "",
 };
 
-const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, action) => {
+export const authReducer: Reducer<IInitialState, TAuthActions> = (state = authInitialState, action) => {
   switch (action.type) {
     case LOGIN_USER_REQUEST:
       return {
@@ -72,12 +73,6 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
         registerError: "",
       };
     case REGISTER_USER_SUCCESS: {
-      let isUser = false;
-
-      if (action.payload.userRole === "user") {
-        isUser = true;
-      }
-
       return {
         ...state,
         registerLoading: false,
@@ -85,7 +80,7 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
         authToken: action.payload.authToken,
         userRole: action.payload.userRole,
         userName: action.payload.name,
-        isUser,
+        isUser: true,
       };
     }
     case REGISTER_USER_ERROR:
@@ -108,9 +103,10 @@ const reducer: Reducer<IInitialState, TAuthActions> = (state = initialState, act
         registerError: "",
       };
     }
+    case AUTH_RESET_STATE: {
+      return authInitialState;
+    }
     default:
       return state;
   }
 };
-
-export default reducer;

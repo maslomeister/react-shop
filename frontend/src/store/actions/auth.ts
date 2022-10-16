@@ -7,6 +7,7 @@ import {
   REGISTER_USER_ERROR,
   AUTH_CLEAR_ERROR,
   AUTH_LOGOUT_USER,
+  AUTH_RESET_STATE,
 } from "./action-types/auth";
 
 export function loginUserRequest(): ILoginUserRequest {
@@ -58,5 +59,11 @@ export function authClearError(): IAuthClearError {
 export function userLogout(): IAuthUserLogout {
   return {
     type: AUTH_LOGOUT_USER,
+  };
+}
+
+export function authResetState(): IAuthResetState {
+  return {
+    type: AUTH_RESET_STATE,
   };
 }
