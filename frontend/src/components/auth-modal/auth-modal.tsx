@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store";
 
-import { loginUserApi } from "../../api/api";
 import { Spinner } from "../spinner/spinner";
-import { Button } from "../button/button";
-import { Input } from "../input/input";
 import { Login } from "./components/login/login";
 import { Register } from "./components/register/register";
 import { toggleModal } from "../../store/actions/shop";
@@ -24,7 +21,7 @@ export function AuthModal() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const modalRoot = document.getElementById("portal-root");
+  const modalRoot = document.getElementById("portal-root") as HTMLElement;
 
   const closeHandler = () => {
     dispatch(toggleModal());
@@ -74,6 +71,6 @@ export function AuthModal() {
         )}
       </div>
     </div>,
-    modalRoot!
+    modalRoot
   );
 }

@@ -122,7 +122,7 @@ export const Product = () => {
       inStock: editItemState.inStock,
     };
     changeProductInfoApi(
-      id!,
+      id,
       authToken,
       product,
       () => {
@@ -134,7 +134,7 @@ export const Product = () => {
         setChangeProductState((prevState) => {
           return { ...prevState, loading: false };
         });
-        dispatch(changeProductData(id!, product));
+        dispatch(changeProductData(id, product));
       },
       (err) => {
         setChangeProductState((prevState) => {
@@ -150,7 +150,7 @@ export const Product = () => {
   };
 
   useEffect(() => {
-    fetchProductApi(id!, dispatch, fetchProductRequest, fetchProductSuccess, fetchProductError);
+    fetchProductApi(id, dispatch, fetchProductRequest, fetchProductSuccess, fetchProductError);
   }, []);
 
   useEffect(() => {
@@ -225,7 +225,7 @@ export const Product = () => {
                   onSaveError={changeProductState.error}
                   finalError={inputsError}
                 >
-                  <CartAmount id={id!} inStock={product.inStock} authToken={authToken} />
+                  <CartAmount id={id} inStock={product.inStock} authToken={authToken} />
                 </EditOrBuyButton>
               </ShowAuthenticatedProduct>
             </div>
