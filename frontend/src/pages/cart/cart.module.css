@@ -1,0 +1,182 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  color: #1e1c1d;
+  background-color: #fff;
+  margin: 16px auto;
+  margin-bottom: 80px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 8px;
+  padding-bottom: 80px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls-container {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  bottom: 0;
+  background-color: #303030;
+  color: #fff;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 16px 32px;
+}
+
+.pay {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.fl-table {
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 16px;
+  white-space: nowrap;
+  background-color: white;
+}
+
+.id {
+  width: 24px;
+}
+
+.name {
+  max-width: 400px;
+  width: 200px;
+}
+
+.price {
+  width: 90px;
+}
+
+.amount {
+  width: 148px;
+}
+
+.total {
+  width: 90px;
+}
+
+.delete {
+  width: 148px;
+}
+
+.fl-table td,
+.fl-table th {
+  text-align: center;
+  padding: 8px 32px;
+}
+
+.fl-table td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fl-table thead th {
+  color: #ffffff;
+  background: #303030;
+}
+
+.fl-table thead th:nth-child(odd) {
+  color: #ffffff;
+  background: #464646;
+}
+
+.fl-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+/* Responsive */
+
+/* @media (max-width: 767px) {
+  .fl-table {
+    display: block;
+    width: 100%;
+  }
+  .table-wrapper:before {
+    content: "Scroll horizontally >";
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: white;
+    padding: 0 0 10px;
+  }
+  .fl-table thead,
+  .fl-table tbody,
+  .fl-table thead th {
+    display: block;
+  }
+  .fl-table thead th:last-child {
+    border-bottom: none;
+  }
+  .fl-table thead {
+    float: left;
+  }
+  .fl-table tbody {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+  }
+  .fl-table td,
+  .fl-table th {
+    padding: 20px 0.625em 0.625em 0.625em;
+    height: 60px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 120px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+  }
+  .fl-table thead th {
+    text-align: left;
+    border-bottom: 1px solid #f7f7f9;
+  }
+  .fl-table tbody tr {
+    display: table-cell;
+  }
+  .fl-table tbody tr:nth-child(odd) {
+    background: none;
+  }
+  .fl-table tr:nth-child(even) {
+    background: transparent;
+  }
+  .fl-table tr td:nth-child(odd) {
+    background: #f8f8f8;
+    border-right: 1px solid #e6e4e4;
+  }
+  .fl-table tr td:nth-child(even) {
+    border-right: 1px solid #e6e4e4;
+  }
+  .fl-table tbody td {
+    display: block;
+    text-align: center;
+  }
+} */

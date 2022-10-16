@@ -1,0 +1,49 @@
+.product {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  color: #1e1c1d;
+  background-color: #fff;
+  margin: 32px auto;
+  margin-bottom: 100px;
+  justify-content: center;
+  padding: 0px 32px;
+  padding-bottom: 100px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  width: 1024px;
+  gap: 32px;
+}
+
+.main-info {
+  display: flex;
+  gap: 132px;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.image {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.name-price {
+  display: flex;
+  min-width: 400px;
+  padding-top: 32px;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

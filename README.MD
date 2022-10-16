@@ -1,3 +1,17 @@
+# [Open deployment](https://maslomeister.github.io/react-shop/)
+
+### Description
+
+This is small shop website
+
+- backend - nodejs, express, node-json-db
+- frontend - react, react-router, redux(no toolkit), css modules
+
+There are two accounts available:
+
+- Customer - `login: Customer, password: qwertycustomer` - this is an **user** account, it can buy products
+- Admin - `login: Admin, password: qwertyadmin` - this is an **admin** account, it can edit product information
+
 ### Local usage
 
 1. Go to backend folder

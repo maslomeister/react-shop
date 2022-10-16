@@ -1,0 +1,13 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  color: #1e1c1d;
+  background-color: #fff;
+  margin: 32px auto;
+  margin-bottom: 100px;
+  justify-content: flex-start;
+  padding: 0px 32px;
+  padding-bottom: 100px;
+}

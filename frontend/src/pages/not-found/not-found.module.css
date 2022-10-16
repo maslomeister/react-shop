@@ -1,0 +1,11 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 60px);
+  color: #1e1c1d;
+  background-color: #fff;
+  margin: 32px auto;
+}
