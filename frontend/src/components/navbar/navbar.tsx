@@ -9,7 +9,7 @@ import { userLogout } from "../../store/actions/auth";
 
 import styles from "./navbar.module.css";
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
   const { authenticated, isUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className={styles.navbar}>
+    <header data-testid="navbar" className={styles.navbar}>
       <ul className={styles.menu}>
         <div className={styles.submenu}>
           <li>
