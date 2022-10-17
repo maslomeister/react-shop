@@ -8,9 +8,10 @@ interface IProps {
   error: string;
   loading: boolean;
   children: React.ReactNode;
+  dataTestId?: string;
 }
 
-export const ShowErrorOrLoading = ({ error, loading, children }: IProps) => {
+export const ShowErrorOrLoading: React.FC<IProps> = ({ error, loading, children, dataTestId }) => {
   if (error) {
     return (
       <div className={styles.error}>
@@ -22,7 +23,7 @@ export const ShowErrorOrLoading = ({ error, loading, children }: IProps) => {
   } else if (loading) {
     return (
       <div className={styles.error}>
-        <Spinner />
+        <Spinner dataTestId={dataTestId} />
       </div>
     );
   }
