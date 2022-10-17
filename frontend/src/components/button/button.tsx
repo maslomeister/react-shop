@@ -79,6 +79,7 @@ export const Button = ({ inStock, inactive, variant, width, type, onClick, loadi
 
   return (
     <button
+      data-testid="button"
       className={`${styles.button} ${blockedType} ${variantType} ${buyStyle} ${loadingStyle}`}
       type={type}
       onClick={onClickHandler}
