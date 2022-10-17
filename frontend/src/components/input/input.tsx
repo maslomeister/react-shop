@@ -6,11 +6,11 @@ import hideIcon from "../../icons/eye-hide.svg";
 import styles from "./input.module.css";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+  value?: string;
   label?: string;
   labelColor?: string;
   maxLength?: number;
-  error: string;
+  error?: string;
   autoComplete?: string;
 }
 
@@ -54,13 +54,13 @@ export const Input = ({
   return (
     <div className={styles["input-container"]}>
       {label && (
-        <label className={styles.label} style={{ color: labelColor }}>
+        <label data-testid="label" className={styles.label} style={{ color: labelColor }}>
           {label}
         </label>
       )}
       <div className={styles["input-container"]}>
         <input
-          className={`${styles.input} ${value.length > 0 ? styles.active : ""}`}
+          className={`${styles.input} ${value && value.length > 0 ? styles.active : ""}`}
           type={inputType}
           placeholder={placeholder}
           onChange={onChange}
@@ -72,9 +72,19 @@ export const Input = ({
           readOnly={readOnly}
           autoComplete={autoComplete}
         />
-        {showToggle && <img className={styles["show-hide"]} src={showPass ? hideIcon : showIcon} alt="eye" onClick={toggleShowPass} />}
+        {showToggle && (
+          <img
+            data-testid="show-hide"
+            className={styles["show-hide"]}
+            src={showPass ? hideIcon : showIcon}
+            alt="eye"
+            onClick={toggleShowPass}
+          />
+        )}
       </div>
-      <label className={styles.error}>{error}</label>
+      <label data-testid="error-label" className={styles.error}>
+        {error}
+      </label>
     </div>
   );
 };
