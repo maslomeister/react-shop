@@ -175,6 +175,7 @@ export const shopReducer: Reducer<IInitialState, TShopActions> = (state = shopIn
     case CLEAR_CART_LOGOUT:
       return {
         ...state,
+        cartIsEmpty: true,
         cart: [],
         cartTotal: 0,
       };
