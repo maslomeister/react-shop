@@ -5,7 +5,7 @@ import styles from "./about.module.css";
 export const About = () => {
   return (
     <main className={styles.about}>
-      <h1>О магазине</h1>
+      <h1 data-testid="about">О магазине</h1>
       <p className={styles.description}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget enim dapibus, ultrices nunc nec, aliquam dolor. Nunc
         ullamcorper dolor porttitor massa bibendum accumsan. Maecenas viverra sem quis urna finibus, at interdum libero viverra. Donec
