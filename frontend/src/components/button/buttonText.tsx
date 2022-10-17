@@ -10,7 +10,7 @@ interface IProps {
 }
 export const ButtonText = ({ className, color, onClick, children }: IProps) => {
   return (
-    <button className={`${styles.button} ${className}`} onClick={onClick} style={{ color: color }}>
+    <button data-testid="text-button" className={`${styles.button} ${className}`} onClick={onClick} style={{ color: color }}>
       {children}
     </button>
   );
