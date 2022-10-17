@@ -16,9 +16,9 @@ import {
   clearCartLogout,
   removeItemFromCart,
   shopResetState,
-} from "../actions/shop";
-import { shopInitialState } from "../reducers/shop";
-import { store } from "..";
+} from "../../actions/shop";
+import { shopInitialState } from "../../reducers/shop";
+import { store } from "../..";
 
 beforeEach(() => {
   store.dispatch(shopResetState());
