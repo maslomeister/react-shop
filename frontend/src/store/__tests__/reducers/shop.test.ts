@@ -416,7 +416,7 @@ describe("Shop reducer", () => {
 
     expect(getShopState()).toEqual({
       ...shopInitialState,
-      cartIsEmpty: false,
+      cartIsEmpty: true,
       cart: [],
       cartTotal: 0,
     });
