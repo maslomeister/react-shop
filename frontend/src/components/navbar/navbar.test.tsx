@@ -1,5 +1,5 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { loginUserData, loginAdminData, cartWithItem } from "../../../__jest__/api-mocks";
+import { loginUserData, loginAdminDataMock, cartWithItemMock } from "../../../__jest__/api-mocks";
 import { Navbar } from "./navbar";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
@@ -27,7 +27,7 @@ describe("Navbar component tests", () => {
     const store = createStore(rootReducer);
 
     store.dispatch(loginUserSuccess(loginUserData));
-    store.dispatch(cartDataSuccess(cartWithItem));
+    store.dispatch(cartDataSuccess(cartWithItemMock));
 
     renderWithProviders(<Navbar />, { store });
 
@@ -44,12 +44,14 @@ describe("Navbar component tests", () => {
     expect(authToken).toEqual(null);
     expect(store.getState().auth.authenticated).toEqual(false);
     expect(store.getState().shop.cart).toEqual([]);
+
+    window.localStorage.removeItem("authToken");
   });
 
   it("Navbar shown with admin panel", () => {
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginAdminData));
+    store.dispatch(loginUserSuccess(loginAdminDataMock));
 
     renderWithProviders(<Navbar />, { store });
 
