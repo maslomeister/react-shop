@@ -1,33 +1,21 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { setupServer } from "msw/node";
 import * as router from "react-router";
-import { loginUserData, loginAdminData, cartWithItem, productWithId0, handlers, products } from "../../../__jest__/api-mocks";
+import { loginUserData, loginAdminDataMock, cartWithItemMock, productWithId0Mock, productsMock } from "../../../__jest__/api-mocks";
 import { ShopItemMemo } from "./shop-item";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
 import { loginUserSuccess } from "../../store/actions/auth";
 import { fetchProductsSuccess } from "../../store/actions/shop";
 
-const server = setupServer(...handlers);
-
-// Enable API mocking before tests.
-beforeAll(() => server.listen());
-
-// Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers());
-
-// Disable API mocking after the tests are done.
-afterAll(() => server.close());
-
 describe("ShopItem component tests", () => {
   it("Show product for unauthorized user", () => {
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />
     );
 
@@ -42,11 +30,11 @@ describe("ShopItem component tests", () => {
 
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />,
       { store }
     );
@@ -58,16 +46,16 @@ describe("ShopItem component tests", () => {
 
   it("While showing for authenticated user add to cart", async () => {
     const store = createStore(rootReducer);
-    store.dispatch(fetchProductsSuccess(products));
+    store.dispatch(fetchProductsSuccess(productsMock));
     store.dispatch(loginUserSuccess(loginUserData));
 
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />,
       { store }
     );
@@ -82,7 +70,7 @@ describe("ShopItem component tests", () => {
 
     await screen.findByRole("button", { name: "В КОРЗИНУ" });
 
-    expect(store.getState().shop.cart).toEqual(cartWithItem);
+    expect(store.getState().shop.cart).toEqual(cartWithItemMock);
   });
 
   it("While showing for authenticated user fail to add to cart", async () => {
@@ -91,11 +79,11 @@ describe("ShopItem component tests", () => {
 
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />,
       { store }
     );
@@ -119,15 +107,15 @@ describe("ShopItem component tests", () => {
 
   it("Show product for authenticated admin", async () => {
     const store = createStore(rootReducer);
-    store.dispatch(loginUserSuccess(loginAdminData));
+    store.dispatch(loginUserSuccess(loginAdminDataMock));
 
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />,
       { store }
     );
@@ -141,7 +129,7 @@ describe("ShopItem component tests", () => {
 
   it("Click on name navigates to more info about product", () => {
     const store = createStore(rootReducer);
-    store.dispatch(fetchProductsSuccess(products));
+    store.dispatch(fetchProductsSuccess(productsMock));
 
     const navigate = jest.fn();
 
@@ -149,11 +137,11 @@ describe("ShopItem component tests", () => {
 
     renderWithProviders(
       <ShopItemMemo
-        id={productWithId0.id}
-        name={productWithId0.name}
-        price={productWithId0.price}
-        inStock={productWithId0.inStock}
-        img={productWithId0.picture}
+        id={productWithId0Mock.id}
+        name={productWithId0Mock.name}
+        price={productWithId0Mock.price}
+        inStock={productWithId0Mock.inStock}
+        img={productWithId0Mock.picture}
       />,
       { store }
     );
