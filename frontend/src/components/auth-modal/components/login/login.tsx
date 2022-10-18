@@ -96,7 +96,7 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate>
+      <form data-testid="login-form" className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate>
         <Input
           label="Логин*"
           labelColor="#fff"
