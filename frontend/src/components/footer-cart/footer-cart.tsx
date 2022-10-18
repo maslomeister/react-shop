@@ -44,7 +44,7 @@ export const FooterCart: React.FC = () => {
       return <p>В корзине пусто</p>;
     } else {
       return (
-        <p>
+        <p data-testid="cart-amount">
           В корзине <span>{cartAmount} </span>
           {getNoun(cartAmount, "товар", "товара", "товаров")} на <span>{cartTotal}$</span>
         </p>
@@ -54,9 +54,9 @@ export const FooterCart: React.FC = () => {
 
   return (
     <ShowCart cartLoading={cartLoading}>
-      <footer className={styles["footer-cart"]} data-testid="footer-cart">
+      <footer data-testid="footer-cart" className={styles["footer-cart"]}>
         <div className={styles.content}>
-          <img className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />
+          <img data-testid="cart-button" className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />
           {isCartEmpty}
         </div>
       </footer>
