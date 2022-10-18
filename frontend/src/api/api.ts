@@ -1,13 +1,22 @@
 import { Dispatch } from "react";
 
-const API_URL = process.env.NODE_ENV === "development" ? "http://localhost:5069/api" : "https://maslomeister-shop.herokuapp.com/api";
+export const API_URL = () => {
+  switch (process.env.NODE_ENV) {
+    case "test":
+      return "api";
+    case "development":
+      return "http://localhost:5069/api";
+    case "production":
+      return "https://maslomeister-shop.herokuapp.com/api";
+  }
+};
 
 interface IError {
   error?: boolean;
   msg?: string | unknown;
 }
 
-const getData = async <T>(url: string, minDelay: number, params?: RequestInit | undefined): Promise<T | IError> => {
+export const getData = async <T>(url: string, minDelay: number, params?: RequestInit | undefined): Promise<T | IError> => {
   try {
     const isRejected = (input: PromiseSettledResult<unknown>): input is PromiseRejectedResult => input.status === "rejected";
 
@@ -51,7 +60,7 @@ export const fetchProductsApi = async (
 ) => {
   dispatch(onRequest());
   try {
-    const data = await getData<IProduct[]>(API_URL + "/products", 300);
+    const data = await getData<IProduct[]>(API_URL() + "/products", 300);
     if (isError(data)) {
       checkForError(data);
     } else {
@@ -71,7 +80,7 @@ export const fetchProductApi = async (
 ) => {
   dispatch(onRequest());
   try {
-    const data = await getData<IProduct>(`${API_URL}/products/${id}`, 300);
+    const data = await getData<IProduct>(`${API_URL()}/products/${id}`, 300);
     if (isError(data)) {
       checkForError(data);
     } else {
@@ -92,7 +101,7 @@ export const changeProductInfoApi = async (
 ) => {
   onRequest();
   try {
-    const data = await getData<IProductData>(`${API_URL}/products/${id}`, 300, {
+    const data = await getData<IProductData>(`${API_URL()}/products/${id}`, 300, {
       method: "PUT",
       headers: { Authorization: authToken, "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -122,7 +131,7 @@ export const addProductToCartApi = async (
 ) => {
   onRequest();
   try {
-    const data = await getData<IProduct>(API_URL + "/cart", 500, {
+    const data = await getData<IProduct>(API_URL() + "/cart", 500, {
       method: "PUT",
       headers: { Authorization: authToken, "Content-Type": "application/json" },
       body: JSON.stringify({ productId, quantity }),
@@ -146,7 +155,7 @@ export const deleteProductFromCartApi = async (
 ) => {
   onRequest();
   try {
-    const data = await getData<Record<string, never>>(API_URL + "/cart", 500, {
+    const data = await getData<Record<string, never>>(API_URL() + "/cart", 500, {
       method: "DELETE",
       headers: { Authorization: authToken, "Content-Type": "application/json" },
       body: JSON.stringify({ productId }),
@@ -171,7 +180,7 @@ export const loginUserApi = async (
 ) => {
   dispatch(onRequest());
   try {
-    const data = await getData<IUserData>(API_URL + "/auth", 300, {
+    const data = await getData<IUserData>(API_URL() + "/auth", 300, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ login, password }),
@@ -196,7 +205,7 @@ export const registerUserApi = async (
 ) => {
   dispatch(onRequest());
   try {
-    const data = await getData<IUserData>(API_URL + "/register", 300, {
+    const data = await getData<IUserData>(API_URL() + "/register", 300, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ login, password }),
@@ -219,7 +228,7 @@ export const verifyUserApi = async (
 ) => {
   onRequest();
   try {
-    const data = await getData<IUserData>(API_URL + "/auth", 300, {
+    const data = await getData<IUserData>(API_URL() + "/auth", 300, {
       headers: { Authorization: authToken, "Content-Type": "application/json" },
     });
     if (isError(data)) {
@@ -241,7 +250,7 @@ export const fetchCartApi = async (
 ) => {
   dispatch(onRequest());
   try {
-    const data = await getData<ICartProduct[]>(API_URL + "/cart", 300, {
+    const data = await getData<ICartProduct[]>(API_URL() + "/cart", 300, {
       headers: { Authorization: authToken, "Content-Type": "application/json" },
     });
     if (isError(data)) {
@@ -262,7 +271,7 @@ export const clearCartApi = async (
 ) => {
   onRequest();
   try {
-    const data = await getData<[]>(API_URL + "/cart", 500, {
+    const data = await getData<[]>(API_URL() + "/cart", 500, {
       method: "DELETE",
       headers: { Authorization: authToken, "Content-Type": "application/json" },
     });
