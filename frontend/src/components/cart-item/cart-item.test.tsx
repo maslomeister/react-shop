@@ -93,9 +93,12 @@ describe("CartItem component tests", () => {
     const loading = await screen.findByText("ЗАГРУЗКА");
     expect(loading).toBeVisible();
 
-    await waitFor(() => {
-      expect(screen.getByTestId("increase")).toBeVisible();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByTestId("increase")).toBeVisible();
+      },
+      { timeout: 3000 }
+    );
   });
 
   it("Item decrease amount", async () => {
