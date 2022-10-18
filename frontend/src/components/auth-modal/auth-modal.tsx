@@ -55,16 +55,16 @@ export const AuthModal: React.FC = () => {
 
   return createPortal(
     <div className={styles["modal-overlay"]} onClick={closeHandler}>
-      <div className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
+      <div data-testid="auth-modal" className={styles["modal"]} onClick={(e) => e.stopPropagation()}>
         {loginLoading || registerLoading ? (
           <div className={styles["spinner-container"]}>
-            <Spinner />
+            <Spinner dataTestId="auth-modal-spinner" />
           </div>
         ) : (
           <>
             <img className={styles.close} src={closeIcon} alt="close" onClick={closeHandler} />
             {loginWindow ? <Login /> : <Register />}
-            <div className={styles["login-register"]} onClick={() => setLoginWindow(!loginWindow)}>
+            <div data-testid="login-register-switch" className={styles["login-register"]} onClick={() => setLoginWindow(!loginWindow)}>
               {loginWindow ? <p>Нет аккаунта? Регистрация</p> : <p>Есть аккаунт? Вход</p>}
             </div>
           </>
