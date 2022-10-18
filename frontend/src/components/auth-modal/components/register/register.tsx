@@ -34,8 +34,9 @@ export const Register: React.FC = () => {
 
     validateLogin();
     validatePassword();
+    validateRepeatPassword();
 
-    if (validateLogin() && validatePassword() && comparePasswords()) {
+    if (validateLogin() && validatePassword() && validateRepeatPassword() && comparePasswords()) {
       registerUserApi(
         inputValues.register_login,
         inputValues.register_password,
@@ -130,7 +131,14 @@ export const Register: React.FC = () => {
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleFormSubmit} onReset={handleFormReset} noValidate autoComplete="off">
+      <form
+        data-testid="register-form"
+        className={styles.form}
+        onSubmit={handleFormSubmit}
+        onReset={handleFormReset}
+        noValidate
+        autoComplete="off"
+      >
         <Input
           label="Логин*"
           labelColor="#fff"
