@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { API_URL } from "../src/api/api";
 
-export const products = [
+export const productsMock = [
   {
     id: "0",
     name: "iPhone 14",
@@ -94,7 +94,7 @@ export const products = [
   },
 ];
 
-export const productWithId0 = {
+export const productWithId0Mock = {
   id: "0",
   name: "iPhone 14",
   description:
@@ -104,7 +104,7 @@ export const productWithId0 = {
   picture: "https://github.com/maslomeister/react-shop/blob/master/frontend/public/images/iphone-14.png?raw=true",
 };
 
-export const cartWithItem = [
+export const cartWithItemMock = [
   {
     id: "0",
     name: "iPhone 14",
@@ -120,7 +120,7 @@ export const loginUserData: IUserData = {
   name: "Customer",
 };
 
-export const loginAdminData: IUserData = {
+export const loginAdminDataMock: IUserData = {
   authToken: "auth1234",
   userRole: "admin",
   name: "Customer",
@@ -128,24 +128,18 @@ export const loginAdminData: IUserData = {
 
 export const handlers = [
   rest.get(`${API_URL()}/products`, (req, res, ctx) => {
-    return res(ctx.json(products), ctx.delay(150));
+    return res(ctx.json(productsMock), ctx.delay(150));
   }),
 
   rest.get(`${API_URL()}/cart`, (req, res, ctx) => {
-    return res(ctx.json(cartWithItem), ctx.delay(150));
+    return res(ctx.json(cartWithItemMock), ctx.delay(150));
   }),
 
   rest.get(`${API_URL()}/auth`, (req, res, ctx) => {
-    const authToken = req.headers.get("Authorization");
-    if (authToken) {
-      if (authToken === "auth1234") {
-        return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "User" }), ctx.delay(150));
-      }
-      return res(ctx.status(501), ctx.json({ error: true, msg: "Неверный токен" }), ctx.delay(150));
-    }
+    return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "User" }), ctx.delay(150));
   }),
 
   rest.put(`${API_URL()}/cart`, (req, res, ctx) => {
-    return res(ctx.json(productWithId0), ctx.delay(150));
+    return res(ctx.json(productWithId0Mock), ctx.delay(150));
   }),
 ];
