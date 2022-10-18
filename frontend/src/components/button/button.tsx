@@ -17,7 +17,13 @@ export const Button: React.FC<IProps> = ({ inStock, inactive, variant, width, ty
     if (error) {
       return "ОШИБКА";
     } else if (loading) {
-      return "ДОБАВЛЯЕМ";
+      if (inStock !== undefined) {
+        return "ДОБАВЛЯЕМ";
+      } else {
+        return "ЗАГРУЗКА";
+      }
+    } else if (children) {
+      return children;
     } else if (inStock !== undefined) {
       if (inStock <= 0) {
         return "НЕТ В НАЛИЧИИ";
@@ -25,7 +31,7 @@ export const Button: React.FC<IProps> = ({ inStock, inactive, variant, width, ty
         return "В КОРЗИНУ";
       }
     }
-  }, [inStock, loading, error]);
+  }, [inStock, loading, error, children]);
 
   const onClickHandler = () => {
     if (onClick) {
@@ -85,7 +91,7 @@ export const Button: React.FC<IProps> = ({ inStock, inactive, variant, width, ty
       onClick={onClickHandler}
       style={{ width: width + "px" }}
     >
-      {children ? children : buyButtonText}
+      {buyButtonText}
     </button>
   );
 };
