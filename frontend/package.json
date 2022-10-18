@@ -20,7 +20,7 @@
     "eslint:check": "eslint --config .eslintrc.json --fix \"src/**/*.{tsx,ts,js}\"",
     "start": "NODE_ENV=development react-scripts start",
     "build": "react-scripts build",
-    "test": "NODE_ENV=test jest",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
