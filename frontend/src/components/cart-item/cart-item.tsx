@@ -121,30 +121,32 @@ export const CartItem: React.FC<IProps> = ({ id, name, price, quantity, total })
 
   const showAmount = useMemo(() => {
     if (itemState.amountLoading) {
-      return <p>Загрузка</p>;
+      return <p>ЗАГРУЗКА</p>;
     } else if (itemState.amountError) {
-      return <p>Ошибка</p>;
+      return <p>ОШИБКА</p>;
     }
 
     return (
       <>
-        <p className={styles["change-amount"]} onClick={() => changeAmountToCart("dec")}>
+        <p data-testid="decrease" className={styles["change-amount"]} onClick={() => changeAmountToCart("dec")}>
           -
         </p>
         <p>{quantity}</p>
         {canAddItem ? (
-          <p className={styles["change-amount"]} onClick={() => changeAmountToCart("inc")}>
+          <p data-testid="increase" className={styles["change-amount"]} onClick={() => changeAmountToCart("inc")}>
             +
           </p>
         ) : (
-          <p className={styles.invisible}>+</p>
+          <p data-testid="no-increase" className={styles.invisible}>
+            +
+          </p>
         )}
       </>
     );
   }, [itemState]);
 
   return (
-    <tr>
+    <tr data-testid={`cart-item-${id}`}>
       <td>{id}</td>
       <td>{name}</td>
       <td>{price}$</td>
@@ -154,7 +156,7 @@ export const CartItem: React.FC<IProps> = ({ id, name, price, quantity, total })
       <td>{total}$</td>
       <td>
         <Button variant="red" loading={itemState.deleteLoading} error={itemState.deleteError} onClick={deleteItem}>
-          Удалить
+          УДАЛИТЬ
         </Button>
       </td>
     </tr>
