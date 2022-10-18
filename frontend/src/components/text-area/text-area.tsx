@@ -10,13 +10,25 @@ interface IProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error: string;
 }
 
-export const TextArea = ({ placeholder, name, label, value, onChange, readOnly, error }: IProps) => {
+export const TextArea: React.FC<IProps> = ({ placeholder, name, label, value, onChange, readOnly, error }) => {
   const counterOrError = useMemo(() => (error ? value.length + "/600 " + error : value.length + "/600"), [value, error]);
   return (
     <div className={styles["input-container"]}>
-      <label className={styles.label}>{label}</label>
-      <textarea className={styles.input} placeholder={placeholder} name={name} value={value} onChange={onChange} readOnly={readOnly} />
-      <label className={`${styles.counter} ${error ? styles.error : ""}`}>{counterOrError}</label>
+      <label data-testid="label" className={styles.label}>
+        {label}
+      </label>
+      <textarea
+        data-testud="text-area"
+        className={styles.input}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        readOnly={readOnly}
+      />
+      <label data-testid="counter-label" className={`${styles.counter} ${error ? styles.error : ""}`}>
+        {counterOrError}
+      </label>
     </div>
   );
 };
