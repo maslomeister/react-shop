@@ -11,7 +11,7 @@ import {
 } from "../actions/action-types/auth";
 import { Reducer } from "redux";
 
-interface IInitialState {
+export interface IAuthInitialState {
   loginLoading: boolean;
   registerLoading: boolean;
   authenticated: boolean;
@@ -35,7 +35,7 @@ export const authInitialState = {
   registerError: "",
 };
 
-export const authReducer: Reducer<IInitialState, TAuthActions> = (state = authInitialState, action) => {
+export const authReducer: Reducer<IAuthInitialState, TAuthActions> = (state = authInitialState, action) => {
   switch (action.type) {
     case LOGIN_USER_REQUEST:
       return {

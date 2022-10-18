@@ -20,7 +20,7 @@ import {
   SHOP_RESET_STATE,
 } from "../actions/action-types/shop";
 
-interface IInitialState {
+export interface IShopInitialState {
   productsLoading: boolean;
   products: IProduct[];
   productsError: string;
@@ -50,7 +50,7 @@ export const shopInitialState = {
   productLoading: true,
 };
 
-export const shopReducer: Reducer<IInitialState, TShopActions> = (state = shopInitialState, action) => {
+export const shopReducer: Reducer<IShopInitialState, TShopActions> = (state = shopInitialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_REQUEST:
       return {
