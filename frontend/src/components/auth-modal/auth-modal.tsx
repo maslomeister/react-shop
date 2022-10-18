@@ -12,7 +12,7 @@ import closeIcon from "../../icons/close.svg";
 
 import styles from "./auth-modal.module.css";
 
-export function AuthModal() {
+export const AuthModal: React.FC = () => {
   const { authenticated, loginLoading, registerLoading, authToken, userRole } = useSelector((state) => state.auth);
   const [loginWindow, setLoginWindow] = useState(true);
 
@@ -73,4 +73,4 @@ export function AuthModal() {
     </div>,
     modalRoot
   );
-}
+};

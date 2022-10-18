@@ -16,7 +16,7 @@ const emptyFields = {
   register_repeatPassword: "",
 };
 
-export const Register = () => {
+export const Register: React.FC = () => {
   const { registerError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [inputValues, setInputValues] = useState({ ...emptyFields });

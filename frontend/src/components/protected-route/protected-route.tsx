@@ -7,7 +7,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export const ProtectedRoute = ({ authenticated, isUser, children }: IProps) => {
+export const ProtectedRoute: React.FC<IProps> = ({ authenticated, isUser, children }) => {
   if (!authenticated || (authenticated && !isUser)) {
     return <Navigate to="/" replace />;
   }

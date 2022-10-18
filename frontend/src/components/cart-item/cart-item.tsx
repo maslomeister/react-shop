@@ -16,7 +16,7 @@ interface IProps {
   total: number;
 }
 
-export const CartItem = ({ id, name, price, quantity, total }: IProps) => {
+export const CartItem: React.FC<IProps> = ({ id, name, price, quantity, total }) => {
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
   const { products } = useSelector((state) => state.shop);

@@ -11,7 +11,7 @@ import cartIcon from "../../icons/cart.svg";
 
 import styles from "./footer-cart.module.css";
 
-const ShowCart = ({ cartLoading, children }: { cartLoading: boolean; children: React.ReactNode }) => {
+const ShowCart: React.FC<{ cartLoading: boolean; children: React.ReactNode }> = ({ cartLoading, children }) => {
   if (cartLoading) {
     return <></>;
   }
@@ -19,7 +19,7 @@ const ShowCart = ({ cartLoading, children }: { cartLoading: boolean; children: R
   return <>{children}</>;
 };
 
-export const FooterCart = () => {
+export const FooterCart: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
@@ -54,7 +54,7 @@ export const FooterCart = () => {
 
   return (
     <ShowCart cartLoading={cartLoading}>
-      <footer className={styles["footer-cart"]}>
+      <footer className={styles["footer-cart"]} data-testid="footer-cart">
         <div className={styles.content}>
           <img className={styles.cart} src={cartIcon} alt="cart" onClick={cartHandler} />
           {isCartEmpty}

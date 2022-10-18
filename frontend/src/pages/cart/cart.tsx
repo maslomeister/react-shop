@@ -14,7 +14,7 @@ interface IProps {
   showFooter: (value: boolean) => void;
 }
 
-export const Cart = ({ showFooter }: IProps) => {
+export const Cart: React.FC<IProps> = ({ showFooter }) => {
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
   const { cart, cartLoading, cartTotal } = useSelector((state) => state.shop);

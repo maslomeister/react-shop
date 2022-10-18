@@ -19,7 +19,7 @@ import styles from "./product.module.css";
 
 const errorsDefault = { name: "", description: "", price: "", inStock: "" };
 
-export const Product = () => {
+export const Product: React.FC = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();

@@ -14,7 +14,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   autoComplete?: string;
 }
 
-export const Input = ({
+export const Input: React.FC<IProps> = ({
   type,
   placeholder,
   name,
@@ -28,7 +28,7 @@ export const Input = ({
   error,
   autoComplete,
   readOnly,
-}: IProps) => {
+}) => {
   const [showPass, setShowPass] = useState(false);
   const toggleShowPass = () => {
     setShowPass(!showPass);

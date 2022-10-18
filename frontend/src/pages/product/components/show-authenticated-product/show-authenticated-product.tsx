@@ -11,7 +11,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export const ShowAuthenticatedProduct = ({ authenticated, isUser, inStock, children }: IProps) => {
+export const ShowAuthenticatedProduct: React.FC<IProps> = ({ authenticated, isUser, inStock, children }) => {
   if (!authenticated) {
     return <p className={styles.text}>Войдите чтобы добавить в корзину</p>;
   }

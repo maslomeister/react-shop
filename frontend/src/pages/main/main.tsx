@@ -5,12 +5,12 @@ import { useSelector } from "../../store";
 
 import { fetchCartApi } from "../../api/api";
 import { cartDataError, cartDataRequest, cartDataSuccess, clearProduct } from "../../store/actions/shop";
-import { ShopItem } from "../../components/shop-item/shop-item";
+import { ShopItemMemo } from "../../components/shop-item/shop-item";
 import { ShowErrorOrLoading } from "../../components/show-error-or-loading/show-error-or-loading";
 
 import styles from "./main.module.css";
 
-export const Main = () => {
+export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const { authToken, authenticated, isUser } = useSelector((state) => state.auth);
   const { products, productsLoading, productsError } = useSelector((state) => state.shop);
@@ -27,12 +27,12 @@ export const Main = () => {
 
   return (
     <main className={styles.main}>
-      <ShowErrorOrLoading loading={productsLoading} error={productsError}>
+      <ShowErrorOrLoading loading={productsLoading} error={productsError} dataTestId="main-spinner">
         <div className={styles.container}>
           {products.length > 0 &&
             products.map((product) => {
               return (
-                <ShopItem
+                <ShopItemMemo
                   id={product.id}
                   img={product.picture}
                   name={product.name}

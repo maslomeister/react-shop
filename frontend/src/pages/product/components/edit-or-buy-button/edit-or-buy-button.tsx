@@ -16,7 +16,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export const EditOrBuyButton = ({
+export const EditOrBuyButton: React.FC<IProps> = ({
   isUser,
   editMode,
   setEditMode,
@@ -26,7 +26,7 @@ export const EditOrBuyButton = ({
   finalError,
   resetEditItemState,
   children,
-}: IProps) => {
+}) => {
   const setEditModeHandler = (mode: boolean) => {
     if (mode) {
       setEditMode(mode);

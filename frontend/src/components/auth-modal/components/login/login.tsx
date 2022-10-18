@@ -15,7 +15,7 @@ const emptyFields = {
   password: "",
 };
 
-export const Login = () => {
+export const Login: React.FC = () => {
   const { loginError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [inputValues, setInputValues] = useState({ ...emptyFields });

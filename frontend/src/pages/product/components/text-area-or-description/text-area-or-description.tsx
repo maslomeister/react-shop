@@ -12,7 +12,7 @@ interface IProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   editMode: boolean;
 }
 
-export const TextAreaOrDescription = ({ value, onChange, readOnly, error, editMode }: IProps) => {
+export const TextAreaOrDescription: React.FC<IProps> = ({ value, onChange, readOnly, error, editMode }) => {
   if (editMode) {
     return (
       <TextArea

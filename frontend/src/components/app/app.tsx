@@ -26,7 +26,7 @@ import { ProtectedRoute } from "../protected-route/protected-route";
 
 import styles from "./app.module.css";
 
-export const App = () => {
+export const App: React.FC = () => {
   const [showFooter, setShowFooter] = useState(true);
   const dispatch = useDispatch();
   const { authenticated, isUser } = useSelector((state) => state.auth);
@@ -90,8 +90,8 @@ export const App = () => {
   }, []);
 
   return (
-    <div className={styles.app}>
-      <ShowErrorOrLoading loading={verifyUserState.loading} error={showError()}>
+    <div data-testid="app" className={styles.app}>
+      <ShowErrorOrLoading loading={verifyUserState.loading} error={showError()} dataTestId="app-spinner">
         <Navbar />
         <Routes>
           <Route path="/" element={<Main />} />

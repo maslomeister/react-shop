@@ -12,7 +12,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   editMode: boolean;
 }
 
-export const InputOrAmount = ({ value, onChange, onBlur, readOnly, error, editMode }: IProps) => {
+export const InputOrAmount: React.FC<IProps> = ({ value, onChange, onBlur, readOnly, error, editMode }) => {
   if (editMode) {
     return (
       <Input

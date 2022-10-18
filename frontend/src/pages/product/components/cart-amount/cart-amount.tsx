@@ -13,7 +13,7 @@ interface IProps {
   authToken: string;
 }
 
-export const CartAmount = ({ id, inStock, authToken }: IProps) => {
+export const CartAmount: React.FC<IProps> = ({ id, inStock, authToken }) => {
   const dispatch = useDispatch();
 
   const [addToCartState, setAddToCartState] = useState({

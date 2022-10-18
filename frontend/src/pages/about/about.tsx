@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./about.module.css";
 
-export const About = () => {
+export const About: React.FC = () => {
   return (
     <main className={styles.about}>
       <h1 data-testid="about">О магазине</h1>

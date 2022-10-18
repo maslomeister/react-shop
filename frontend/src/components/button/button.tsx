@@ -12,7 +12,7 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   error?: boolean;
 }
 
-export const Button = ({ inStock, inactive, variant, width, type, onClick, loading, error, children }: IProps) => {
+export const Button: React.FC<IProps> = ({ inStock, inactive, variant, width, type, onClick, loading, error, children }) => {
   const buyButtonText = useMemo(() => {
     if (error) {
       return "ОШИБКА";
