@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 
-export const API_URL = process.env.NODE_ENV ? "http://localhost:5069/api" : "https://maslomeister-shop.herokuapp.com/api";
+export const API_URL =
+  process.env.NODE_ENV === "development" ? "http://localhost:5069/api" : "https://maslomeister-shop.herokuapp.com/api";
 
 interface IError {
   error?: boolean;
