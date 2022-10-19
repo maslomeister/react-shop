@@ -21,3 +21,7 @@ There are two accounts available:
 5. run `npm i` command and then run `npm start` command
 6. Wait for client to start
 7. Open [http://localhost:3000/react-shop](http://localhost:3000/react-shop) to view it in your browser.
+
+### Testing
+
+Run `npm run test` to run all unit/integration tests and get coverage report
