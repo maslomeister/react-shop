@@ -1,28 +1,19 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
-import { fetchCartApi } from "../../api/api";
-import { cartDataError, cartDataRequest, cartDataSuccess, clearProduct } from "../../store/actions/shop";
+import { clearProduct } from "../../store/actions/shop";
 import { ShopItemMemo } from "../../components/shop-item/shop-item";
 import { ShowErrorOrLoading } from "../../components/show-error-or-loading/show-error-or-loading";
 
 import styles from "./main.module.css";
 
 export const Main: React.FC = () => {
-  const dispatch = useDispatch();
-  const { authToken, authenticated, isUser } = useSelector((state) => state.auth);
-  const { products, productsLoading, productsError } = useSelector((state) => state.shop);
+  const dispatch = useAppDispatch();
+  const { products, productsLoading, productsError } = useAppSelector((state) => state.shop);
 
   useEffect(() => {
     dispatch(clearProduct());
-  }, []);
-
-  useEffect(() => {
-    if (authenticated && isUser) {
-      fetchCartApi(authToken, dispatch, cartDataRequest, cartDataSuccess, cartDataError);
-    }
   }, []);
 
   return (
