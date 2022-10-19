@@ -47,6 +47,8 @@ module.exports = {
     },
   },
 
+  testTimeout: 3000,
+
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
 
