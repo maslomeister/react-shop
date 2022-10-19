@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
 import { addProductToCartApi, deleteProductFromCartApi } from "../../api/api";
 import { addToCart, removeItemFromCart } from "../../store/actions/shop";
@@ -17,9 +16,9 @@ interface IProps {
 }
 
 export const CartItem: React.FC<IProps> = ({ id, name, price, quantity, total }) => {
-  const dispatch = useDispatch();
-  const { authToken } = useSelector((state) => state.auth);
-  const { products } = useSelector((state) => state.shop);
+  const dispatch = useAppDispatch();
+  const { authToken } = useAppSelector((state) => state.auth);
+  const { products } = useAppSelector((state) => state.shop);
 
   const canAddItem = useMemo(() => {
     if (products.length > 0) {

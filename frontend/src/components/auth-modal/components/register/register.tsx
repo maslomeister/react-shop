@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../../../store";
+import { useAppSelector, useAppDispatch } from "../../../../store";
 
 import { Button } from "../../../button/button";
 import { registerUserApi } from "../../../../api/api";
@@ -17,8 +16,8 @@ const emptyFields = {
 };
 
 export const Register: React.FC = () => {
-  const { registerError } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { registerError } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const [inputValues, setInputValues] = useState({ ...emptyFields });
   const [errorValues, setErrorValues] = useState({ ...emptyFields });
 

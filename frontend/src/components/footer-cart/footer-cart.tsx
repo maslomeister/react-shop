@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 import { fetchCartApi } from "../../api/api";
@@ -21,9 +20,9 @@ const ShowCart: React.FC<{ cartLoading: boolean; children: React.ReactNode }> = 
 
 export const FooterCart: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { authToken } = useSelector((state) => state.auth);
-  const { cartLoading, cartTotal, cart, cartIsEmpty } = useSelector((state) => state.shop);
+  const dispatch = useAppDispatch();
+  const { authToken } = useAppSelector((state) => state.auth);
+  const { cartLoading, cartTotal, cart, cartIsEmpty } = useAppSelector((state) => state.shop);
 
   const cartAmount = useMemo(() => {
     return cart.reduce((acc, item) => acc + item.quantity, 0);

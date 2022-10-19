@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
 import { ButtonText } from "../button/buttonText";
 import { clearCartLogout, toggleModal } from "../../store/actions/shop";
@@ -10,8 +9,8 @@ import { userLogout } from "../../store/actions/auth";
 import styles from "./navbar.module.css";
 
 export const Navbar: React.FC = () => {
-  const { authenticated, isUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { authenticated, isUser } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   const onLoginClick = () => {
     dispatch(toggleModal());

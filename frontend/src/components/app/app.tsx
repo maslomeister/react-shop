@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
 import { fetchCartApi, fetchProductsApi, verifyUserApi } from "../../api/api";
 import { loginUserSuccess } from "../../store/actions/auth";
@@ -28,9 +27,9 @@ import styles from "./app.module.css";
 
 export const App: React.FC = () => {
   const [showFooter, setShowFooter] = useState(true);
-  const dispatch = useDispatch();
-  const { authenticated, isUser } = useSelector((state) => state.auth);
-  const { modalIsOpened, productsError } = useSelector((state) => state.shop);
+  const dispatch = useAppDispatch();
+  const { authenticated, isUser } = useAppSelector((state) => state.auth);
+  const { modalIsOpened, productsError } = useAppSelector((state) => state.shop);
 
   const [verifyUserState, setVerifyUserState] = useState({
     loading: true,

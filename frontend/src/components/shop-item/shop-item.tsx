@@ -1,7 +1,6 @@
 import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
 import { Button } from "../button/button";
 import { addToCart } from "../../store/actions/shop";
@@ -33,16 +32,17 @@ interface IProps {
   name: string;
   price: number;
   inStock: number;
+  dataTestid?: string;
 }
 
-const ShopItem: React.FC<IProps> = ({ id, img, name, price, inStock }) => {
-  const dispatch = useDispatch();
+const ShopItem: React.FC<IProps> = ({ id, img, name, price, inStock, dataTestid }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [addToCartState, setAddToCartState] = useState({
     loading: false,
     error: false,
   });
-  const { authenticated, authToken, isUser } = useSelector((state) => state.auth);
+  const { authenticated, authToken, isUser } = useAppSelector((state) => state.auth);
 
   const onClickHandler = () => {
     addProductToCartApi(
@@ -80,7 +80,7 @@ const ShopItem: React.FC<IProps> = ({ id, img, name, price, inStock }) => {
   };
 
   return (
-    <div data-testid="shop-item" className={styles["shop-item"]}>
+    <div data-testid={dataTestid} className={styles["shop-item"]}>
       <img className={styles.image} src={img} alt="product" />
       <div className={styles.info}>
         <p data-testid="product-name" className={styles.title} onClick={aboutProductHandler}>

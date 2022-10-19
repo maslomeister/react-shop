@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../../../../store";
 
 import { Button } from "../../../button/button";
 import { loginUserApi } from "../../../../api/api";
@@ -8,7 +8,6 @@ import { loginUserRequest, loginUserError, loginUserSuccess, authClearError } fr
 import { Input } from "../../../input/input";
 
 import styles from "./login.module.css";
-import { useSelector } from "../../../../store";
 
 const emptyFields = {
   login: "",
@@ -16,8 +15,8 @@ const emptyFields = {
 };
 
 export const Login: React.FC = () => {
-  const { loginError } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { loginError } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const [inputValues, setInputValues] = useState({ ...emptyFields });
   const [errorValues, setErrorValues] = useState({ ...emptyFields });
 

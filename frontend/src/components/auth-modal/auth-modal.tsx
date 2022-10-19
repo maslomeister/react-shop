@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 
 import { Spinner } from "../spinner/spinner";
 import { Login } from "./components/login/login";
@@ -13,10 +12,10 @@ import closeIcon from "../../icons/close.svg";
 import styles from "./auth-modal.module.css";
 
 export const AuthModal: React.FC = () => {
-  const { authenticated, loginLoading, registerLoading, authToken, userRole } = useSelector((state) => state.auth);
+  const { authenticated, loginLoading, registerLoading, authToken, userRole } = useAppSelector((state) => state.auth);
   const [loginWindow, setLoginWindow] = useState(true);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
