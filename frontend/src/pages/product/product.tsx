@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
 import { useParams } from "react-router-dom";
 
 import { changeProductInfoApi, fetchProductApi } from "../../api/api";
@@ -11,7 +10,7 @@ import { InputOrTitle } from "./components/input-or-title/input-or-title";
 import { TextAreaOrDescription } from "./components/text-area-or-description/text-area-or-description";
 import { ShowErrorOrLoading } from "../../components/show-error-or-loading/show-error-or-loading";
 import { CartAmount } from "./components/cart-amount/cart-amount";
-import { InputOrPice } from "./components/input-or-price/input-or-price";
+import { InputOrPrice } from "./components/input-or-price/input-or-price";
 import { InputOrAmount } from "./components/input-or-amount/input-or-amount";
 import { allowOnlyNumbers } from "../../utils/utils";
 
@@ -22,9 +21,9 @@ const errorsDefault = { name: "", description: "", price: "", inStock: "" };
 export const Product: React.FC = () => {
   const { id } = useParams();
 
-  const dispatch = useDispatch();
-  const { product, productError, productLoading } = useSelector((state) => state.shop);
-  const { authenticated, authToken, isUser } = useSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { product, productError, productLoading } = useAppSelector((state) => state.shop);
+  const { authenticated, authToken, isUser } = useAppSelector((state) => state.auth);
 
   const [editItemState, setEditItemState] = useState({
     editMode: false,
@@ -93,9 +92,9 @@ export const Product: React.FC = () => {
     }
   };
 
-  const validatePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const price = event.target.value;
-    if (price === "0") {
+  const validatePrice = () => {
+    const price = editItemState.price;
+    if (price === 0) {
       changeItemErrorField("price", "Цена не может быть 0");
       return false;
     } else {
@@ -121,32 +120,39 @@ export const Product: React.FC = () => {
       price: editItemState.price,
       inStock: editItemState.inStock,
     };
-    changeProductInfoApi(
-      id,
-      authToken,
-      product,
-      () => {
-        setChangeProductState((prevState) => {
-          return { ...prevState, loading: true };
-        });
-      },
-      () => {
-        setChangeProductState((prevState) => {
-          return { ...prevState, loading: false };
-        });
-        dispatch(changeProductData(id, product));
-      },
-      (err) => {
-        setChangeProductState((prevState) => {
-          return { ...prevState, loading: false, isError: true, error: err };
-        });
-        setTimeout(() => {
+
+    validateName();
+    validatePrice();
+    validateDescription();
+
+    if (validateName() && validatePrice() && validateDescription()) {
+      changeProductInfoApi(
+        id,
+        authToken,
+        product,
+        () => {
           setChangeProductState((prevState) => {
-            return { ...prevState, loading: false, isError: false, error: "" };
+            return { ...prevState, loading: true };
           });
-        }, 1000);
-      }
-    );
+        },
+        () => {
+          setChangeProductState((prevState) => {
+            return { ...prevState, loading: false };
+          });
+          dispatch(changeProductData(id, product));
+        },
+        (err) => {
+          setChangeProductState((prevState) => {
+            return { ...prevState, loading: false, isError: true, error: err };
+          });
+          setTimeout(() => {
+            setChangeProductState((prevState) => {
+              return { ...prevState, loading: false, isError: false, error: "" };
+            });
+          }, 1000);
+        }
+      );
+    }
   };
 
   useEffect(() => {
@@ -179,7 +185,7 @@ export const Product: React.FC = () => {
   return (
     <main className={styles.product}>
       <ShowErrorOrLoading loading={productLoading} error={productError}>
-        <div className={styles.data}>
+        <div data-testid="product-data" className={styles.data}>
           <div className={styles["main-info"]}>
             <img className={styles.image} src={product.picture} alt="product" />
             <div className={styles["name-price"]}>
@@ -191,7 +197,7 @@ export const Product: React.FC = () => {
                 readOnly={changeProductState.loading}
                 editMode={editItemState.editMode}
               />
-              <InputOrPice
+              <InputOrPrice
                 value={editItemState.price}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   changeItemField("price", Number(allowOnlyNumbers(event.target.value)));
@@ -223,7 +229,7 @@ export const Product: React.FC = () => {
                   onSave={changeProductInfo}
                   onSaveLoading={changeProductState.loading}
                   onSaveError={changeProductState.error}
-                  finalError={inputsError}
+                  validationsError={inputsError}
                 >
                   <CartAmount id={id} inStock={product.inStock} authToken={authToken} />
                 </EditOrBuyButton>

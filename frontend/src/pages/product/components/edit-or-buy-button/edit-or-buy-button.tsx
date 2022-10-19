@@ -11,7 +11,7 @@ interface IProps {
   onSave: () => void;
   onSaveLoading: boolean;
   onSaveError: string;
-  finalError: string;
+  validationsError: string;
   resetEditItemState: () => void;
   children: React.ReactNode;
 }
@@ -23,7 +23,7 @@ export const EditOrBuyButton: React.FC<IProps> = ({
   onSave,
   onSaveLoading,
   onSaveError,
-  finalError,
+  validationsError: finalError,
   resetEditItemState,
   children,
 }) => {
@@ -50,10 +50,10 @@ export const EditOrBuyButton: React.FC<IProps> = ({
         <div className={styles["controls-container"]}>
           <div className={styles.controls}>
             <Button variant="red" onClick={resetEditItemState}>
-              Отмена
+              ОТМЕНА
             </Button>
-            <Button loading={onSaveLoading} error={onSaveError ? true : false} onClick={onSave}>
-              Сохранить
+            <Button inactive={finalError ? true : false} loading={onSaveLoading} error={onSaveError ? true : false} onClick={onSave}>
+              СОХРАНИТЬ
             </Button>
           </div>
           <label className={styles["edit-error"]}>{error}</label>
@@ -62,7 +62,7 @@ export const EditOrBuyButton: React.FC<IProps> = ({
     } else {
       return (
         <div className={styles.edit}>
-          <Button onClick={() => setEditModeHandler(true)}>Редактировать</Button>
+          <Button onClick={() => setEditModeHandler(true)}>РЕДАКТИРОВАТЬ</Button>
         </div>
       );
     }

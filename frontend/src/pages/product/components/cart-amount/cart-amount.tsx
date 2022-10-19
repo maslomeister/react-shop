@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../../store";
 
 import { addProductToCartApi } from "../../../../api/api";
 import { addToCart } from "../../../../store/actions/shop";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const CartAmount: React.FC<IProps> = ({ id, inStock, authToken }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [addToCartState, setAddToCartState] = useState({
     loading: false,
@@ -23,20 +23,17 @@ export const CartAmount: React.FC<IProps> = ({ id, inStock, authToken }) => {
   const [cartAmount, setCartAmount] = useState(1);
 
   const changeAmountToCart = (action: string) => {
-    switch (action) {
-      case "inc":
-        if (inStock - cartAmount > 0) {
-          setCartAmount(cartAmount + 1);
-        }
-        break;
-      case "dec":
-        if (cartAmount - 1 > 0) {
-          setCartAmount(cartAmount - 1);
-        }
-        break;
-      default:
+    if (action === "inc") {
+      if (inStock - cartAmount > 0) {
         setCartAmount(cartAmount + 1);
-        break;
+      }
+      return;
+    }
+    if (action === "dec") {
+      if (cartAmount - 1 > 0) {
+        setCartAmount(cartAmount - 1);
+      }
+      return;
     }
   };
 
@@ -75,11 +72,11 @@ export const CartAmount: React.FC<IProps> = ({ id, inStock, authToken }) => {
   return (
     <div className={styles["cart-amount"]}>
       <div className={styles["amount-controls"]}>
-        <p className={styles["change-amount"]} onClick={() => changeAmountToCart("dec")}>
+        <p data-testid="dec" className={styles["change-amount"]} onClick={() => changeAmountToCart("dec")}>
           -
         </p>
         <p className={styles["change-amount"]}>{cartAmount}</p>
-        <p className={styles["change-amount"]} onClick={() => changeAmountToCart("inc")}>
+        <p data-testid="inc" className={styles["change-amount"]} onClick={() => changeAmountToCart("inc")}>
           +
         </p>
       </div>
