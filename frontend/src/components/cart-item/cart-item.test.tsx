@@ -93,12 +93,9 @@ describe("CartItem component tests", () => {
     const loading = await screen.findByText("ЗАГРУЗКА");
     expect(loading).toBeVisible();
 
-    await waitFor(
-      () => {
-        expect(screen.getByTestId("increase")).toBeVisible();
-      },
-      { timeout: 3000 }
-    );
+    await waitFor(() => {
+      expect(screen.getByTestId("increase")).toBeVisible();
+    });
   });
 
   it("Item decrease amount", async () => {
@@ -176,12 +173,9 @@ describe("CartItem component tests", () => {
     const loading = screen.getAllByText("ЗАГРУЗКА")[0];
     expect(loading).toBeVisible();
 
-    await waitFor(
-      () => {
-        expect(store.getState().shop.cart).toEqual([]);
-      },
-      { timeout: 3000 }
-    );
+    await waitFor(() => {
+      expect(store.getState().shop.cart).toEqual([]);
+    });
   });
 
   it("Item change amount error", async () => {
@@ -260,18 +254,12 @@ describe("CartItem component tests", () => {
 
     fireEvent.click(deleteButton);
 
-    await waitFor(
-      async () => {
-        expect(screen.getByText("ОШИБКА")).toBeVisible();
-      },
-      { timeout: 3000 }
-    );
+    await waitFor(async () => {
+      expect(screen.getByText("ОШИБКА")).toBeVisible();
+    });
 
-    await waitFor(
-      async () => {
-        expect(screen.getByText("УДАЛИТЬ")).toBeVisible();
-      },
-      { timeout: 3000 }
-    );
+    await waitFor(async () => {
+      expect(screen.getByText("УДАЛИТЬ")).toBeVisible();
+    });
   });
 });

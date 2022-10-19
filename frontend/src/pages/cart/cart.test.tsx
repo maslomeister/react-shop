@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { loginUserDataMock, cartWithItemMock, productsMock } from "../../../__jest__/api-mocks";
 import { Cart } from "./cart";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
@@ -93,6 +93,8 @@ describe("Cart component tests", () => {
 
     expect(await screen.findByText("ОШИБКА")).toBeVisible;
 
-    expect(await screen.findByText("Отчистить корзину")).toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByText("Отчистить корзину")).toBeVisible();
+    });
   });
 });
