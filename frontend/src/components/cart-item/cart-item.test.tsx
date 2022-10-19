@@ -260,12 +260,18 @@ describe("CartItem component tests", () => {
 
     fireEvent.click(deleteButton);
 
-    await waitFor(async () => {
-      expect(screen.getByText("ОШИБКА")).toBeVisible();
-    });
+    await waitFor(
+      async () => {
+        expect(screen.getByText("ОШИБКА")).toBeVisible();
+      },
+      { timeout: 3000 }
+    );
 
-    await waitFor(async () => {
-      expect(screen.getByText("УДАЛИТЬ")).toBeVisible();
-    });
+    await waitFor(
+      async () => {
+        expect(screen.getByText("УДАЛИТЬ")).toBeVisible();
+      },
+      { timeout: 3000 }
+    );
   });
 });
