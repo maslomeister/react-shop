@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-export default {
+module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -32,10 +32,10 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  // coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
-  coverageReporters: ["text", "text-summary", "lcov", "clover"],
+  coverageReporters: ["text", "text-summary", "lcov"],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
@@ -178,6 +178,25 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
+    // "^.+\\.(t|j)sx?$": [
+    //   "@swc/jest",
+    //   {
+    //     jsc: {
+    //       parser: {
+    //         syntax: "typescript",
+    //         decorators: true,
+    //       },
+    //       target: "es2021",
+    //       transform: {
+    //         decoratorMetadata: true,
+    //         react: {
+    //           runtime: "automatic",
+    //         },
+    //       },
+    //     },
+    //     sourceMaps: true,
+    //   },
+    // ],
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__jest__/file-transformer.js",
   },
 
