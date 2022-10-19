@@ -77,7 +77,7 @@ describe("App component tests", () => {
     window.localStorage.removeItem("authToken");
   });
 
-  it("Failed to load products", async () => {
+  it("Failed to load products because of server error", async () => {
     mswServer.use(
       rest.get(`${API_URL}/products`, (req, res, ctx) => {
         return res(ctx.status(501), ctx.json({ error: true, msg: "Неизвестная ошибка" }), ctx.delay(150));
@@ -87,6 +87,20 @@ describe("App component tests", () => {
     renderWithProviders(<App />);
 
     const error = await screen.findByText("Неизвестная ошибка");
+
+    expect(error).toBeVisible();
+  });
+
+  it("Failed to load products because of network error", async () => {
+    mswServer.use(
+      rest.get(`${API_URL}/products`, (req, res) => {
+        return res.networkError("Failed to connect");
+      })
+    );
+
+    renderWithProviders(<App />);
+
+    const error = await screen.findByText("Network request failed");
 
     expect(error).toBeVisible();
   });
