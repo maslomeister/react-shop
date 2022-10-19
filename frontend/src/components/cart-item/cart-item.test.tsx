@@ -61,7 +61,7 @@ describe("CartItem component tests", () => {
 
   it("Item increase amount", async () => {
     mswServer.use(
-      rest.put(`${API_URL()}/cart`, (req, res, ctx) => {
+      rest.put(`${API_URL}/cart`, (req, res, ctx) => {
         return res(ctx.json({ ...productWithId0Mock, inStock: 3 }), ctx.delay(150));
       })
     );
@@ -103,7 +103,7 @@ describe("CartItem component tests", () => {
 
   it("Item decrease amount", async () => {
     mswServer.use(
-      rest.put(`${API_URL()}/cart`, (req, res, ctx) => {
+      rest.put(`${API_URL}/cart`, (req, res, ctx) => {
         return res(ctx.json({ ...productWithId0Mock, inStock: 4 }), ctx.delay(150));
       })
     );
@@ -142,7 +142,7 @@ describe("CartItem component tests", () => {
 
   it("Item decrease with quantity=1 and remove it from cart", async () => {
     mswServer.use(
-      rest.delete(`${API_URL()}/cart`, (req, res, ctx) => {
+      rest.delete(`${API_URL}/cart`, (req, res, ctx) => {
         return res(ctx.json({}), ctx.delay(150));
       })
     );
@@ -186,7 +186,7 @@ describe("CartItem component tests", () => {
 
   it("Item change amount error", async () => {
     mswServer.use(
-      rest.put(`${API_URL()}/cart`, (req, res, ctx) => {
+      rest.put(`${API_URL}/cart`, (req, res, ctx) => {
         return res(ctx.status(500), ctx.json({ error: true, msg: "Ошибка" }), ctx.delay(150));
       })
     );
@@ -229,7 +229,7 @@ describe("CartItem component tests", () => {
 
   it("Item delete error", async () => {
     mswServer.use(
-      rest.delete(`${API_URL()}/cart`, (req, res, ctx) => {
+      rest.delete(`${API_URL}/cart`, (req, res, ctx) => {
         return res(ctx.status(500), ctx.json({ error: true, msg: "Ошибка" }), ctx.delay(150));
       })
     );

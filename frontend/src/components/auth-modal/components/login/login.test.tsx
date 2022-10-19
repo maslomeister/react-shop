@@ -16,7 +16,7 @@ describe("AuthModal Login component tests", () => {
 
   it("Login success", () => {
     mswServer.use(
-      rest.post(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.post(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "Login" }), ctx.delay(150));
       })
     );
@@ -38,7 +38,7 @@ describe("AuthModal Login component tests", () => {
 
   it("Login fail because password or name was incorrect", async () => {
     mswServer.use(
-      rest.post(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.post(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.status(401), ctx.json({ error: true, msg: "Неверный логин или пароль" }), ctx.delay(150));
       })
     );

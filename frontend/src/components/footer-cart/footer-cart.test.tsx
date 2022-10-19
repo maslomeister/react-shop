@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react";
 import * as router from "react-router";
-import { loginUserData } from "../../../__jest__/api-mocks";
+import { loginUserDataMock } from "../../../__jest__/api-mocks";
 import { FooterCart } from "./footer-cart";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
@@ -11,7 +11,7 @@ describe("FooterCart component tests", () => {
   it("Empty cart is shown", () => {
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
     store.dispatch(cartDataSuccess([]));
 
     renderWithProviders(<FooterCart />, { store });
@@ -40,7 +40,7 @@ describe("FooterCart component tests", () => {
   it("Cart with 1 item is shown", async () => {
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(<FooterCart />, { store });
 
@@ -60,7 +60,7 @@ describe("FooterCart component tests", () => {
 
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(<FooterCart />, { store });
 

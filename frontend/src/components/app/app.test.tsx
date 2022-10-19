@@ -22,7 +22,7 @@ describe("App component tests", () => {
     window.localStorage.setItem("authToken", "auth1234");
 
     mswServer.use(
-      rest.get(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.get(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "User" }), ctx.delay(150));
       })
     );
@@ -43,7 +43,7 @@ describe("App component tests", () => {
     window.localStorage.setItem("authToken", "0");
 
     mswServer.use(
-      rest.get(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.get(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.status(501), ctx.json({ error: true, msg: "Неверный токен" }), ctx.delay(150));
       })
     );
@@ -63,7 +63,7 @@ describe("App component tests", () => {
     window.localStorage.setItem("authToken", "0");
 
     mswServer.use(
-      rest.get(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.get(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.status(501), ctx.json({ error: true, msg: "Неизвестная ошибка" }), ctx.delay(150));
       })
     );
@@ -79,7 +79,7 @@ describe("App component tests", () => {
 
   it("Failed to load products", async () => {
     mswServer.use(
-      rest.get(`${API_URL()}/products`, (req, res, ctx) => {
+      rest.get(`${API_URL}/products`, (req, res, ctx) => {
         return res(ctx.status(501), ctx.json({ error: true, msg: "Неизвестная ошибка" }), ctx.delay(150));
       })
     );

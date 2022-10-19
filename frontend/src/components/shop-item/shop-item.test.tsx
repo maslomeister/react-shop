@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react";
 import * as router from "react-router";
-import { loginUserData, loginAdminDataMock, cartWithItemMock, productWithId0Mock, productsMock } from "../../../__jest__/api-mocks";
+import { loginUserDataMock, loginAdminDataMock, cartWithItemMock, productWithId0Mock, productsMock } from "../../../__jest__/api-mocks";
 import { ShopItemMemo } from "./shop-item";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
@@ -26,7 +26,7 @@ describe("ShopItem component tests", () => {
 
   it("Show product for authenticated user", async () => {
     const store = createStore(rootReducer);
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(
       <ShopItemMemo
@@ -47,7 +47,7 @@ describe("ShopItem component tests", () => {
   it("While showing for authenticated user add to cart", async () => {
     const store = createStore(rootReducer);
     store.dispatch(fetchProductsSuccess(productsMock));
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(
       <ShopItemMemo
@@ -75,7 +75,7 @@ describe("ShopItem component tests", () => {
 
   it("While showing for authenticated user fail to add to cart", async () => {
     const store = createStore(rootReducer);
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(
       <ShopItemMemo

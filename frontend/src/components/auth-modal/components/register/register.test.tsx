@@ -16,7 +16,7 @@ describe("AuthModal Register component tests", () => {
 
   it("Register success", () => {
     mswServer.use(
-      rest.post(`${API_URL()}/register`, (req, res, ctx) => {
+      rest.post(`${API_URL}/register`, (req, res, ctx) => {
         return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "Login" }), ctx.delay(150));
       })
     );
@@ -42,7 +42,7 @@ describe("AuthModal Register component tests", () => {
 
   it("Register fail because login already exists", async () => {
     mswServer.use(
-      rest.post(`${API_URL()}/register`, (req, res, ctx) => {
+      rest.post(`${API_URL}/register`, (req, res, ctx) => {
         return res(ctx.status(401), ctx.json({ error: true, msg: "Такой логин уже существует" }), ctx.delay(150));
       })
     );

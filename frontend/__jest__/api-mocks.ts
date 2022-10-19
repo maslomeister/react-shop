@@ -114,7 +114,7 @@ export const cartWithItemMock = [
   },
 ];
 
-export const loginUserData: IUserData = {
+export const loginUserDataMock: IUserData = {
   authToken: "auth1234",
   userRole: "user",
   name: "Customer",
@@ -127,19 +127,23 @@ export const loginAdminDataMock: IUserData = {
 };
 
 export const handlers = [
-  rest.get(`${API_URL()}/products`, (req, res, ctx) => {
+  rest.get(`${API_URL}/products`, (req, res, ctx) => {
     return res(ctx.json(productsMock), ctx.delay(150));
   }),
 
-  rest.get(`${API_URL()}/cart`, (req, res, ctx) => {
+  rest.get(`${API_URL}/products/0`, (req, res, ctx) => {
+    return res(ctx.json(productWithId0Mock), ctx.delay(150));
+  }),
+
+  rest.get(`${API_URL}/cart`, (req, res, ctx) => {
     return res(ctx.json(cartWithItemMock), ctx.delay(150));
   }),
 
-  rest.get(`${API_URL()}/auth`, (req, res, ctx) => {
+  rest.get(`${API_URL}/auth`, (req, res, ctx) => {
     return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "User" }), ctx.delay(150));
   }),
 
-  rest.put(`${API_URL()}/cart`, (req, res, ctx) => {
+  rest.put(`${API_URL}/cart`, (req, res, ctx) => {
     return res(ctx.json(productWithId0Mock), ctx.delay(150));
   }),
 ];

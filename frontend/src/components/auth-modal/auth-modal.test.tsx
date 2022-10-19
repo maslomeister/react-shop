@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import * as router from "react-router";
 import { rest } from "msw";
 import { API_URL } from "../../api/api";
-import { loginUserData } from "../../../__jest__/api-mocks";
+import { loginUserDataMock } from "../../../__jest__/api-mocks";
 import { AuthModal } from "./auth-modal";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
@@ -35,7 +35,7 @@ describe("AuthModal component tests", () => {
     renderWithProviders(<AuthModal />);
 
     mswServer.use(
-      rest.post(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.post(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "Login" }), ctx.delay(150));
       })
     );
@@ -61,7 +61,7 @@ describe("AuthModal component tests", () => {
     renderWithProviders(<AuthModal />);
 
     mswServer.use(
-      rest.post(`${API_URL()}/auth`, (req, res, ctx) => {
+      rest.post(`${API_URL}/auth`, (req, res, ctx) => {
         return res(ctx.json({ authToken: "auth1234", userRole: "user", name: "Login" }), ctx.delay(150));
       })
     );
@@ -108,7 +108,7 @@ describe("AuthModal component tests", () => {
 
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
 
     renderWithProviders(<AuthModal />, { store });
 

@@ -1,5 +1,5 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { loginUserData, loginAdminDataMock, cartWithItemMock } from "../../../__jest__/api-mocks";
+import { loginUserDataMock, loginAdminDataMock, cartWithItemMock } from "../../../__jest__/api-mocks";
 import { Navbar } from "./navbar";
 import { renderWithProviders, rootReducer } from "../../../__jest__/render-with-redux";
 import { createStore } from "redux";
@@ -26,7 +26,7 @@ describe("Navbar component tests", () => {
     window.localStorage.setItem("authToken", "token");
     const store = createStore(rootReducer);
 
-    store.dispatch(loginUserSuccess(loginUserData));
+    store.dispatch(loginUserSuccess(loginUserDataMock));
     store.dispatch(cartDataSuccess(cartWithItemMock));
 
     renderWithProviders(<Navbar />, { store });
