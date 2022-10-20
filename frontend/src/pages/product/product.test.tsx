@@ -256,7 +256,7 @@ describe("Product component tests", () => {
     expect(screen.getByText("New product name")).toBeVisible();
   });
 
-  it("Change product", async () => {
+  it("Change product error", async () => {
     mswServer.use(
       rest.put(`${API_URL}/products/0`, (req, res, ctx) => {
         return res(ctx.status(400), ctx.json({ error: true, msg: "error" }), ctx.delay(150));
