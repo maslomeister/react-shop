@@ -3,7 +3,9 @@ import { Input } from "./input";
 
 describe("Input component tests", () => {
   it("Input shows label, placeholder and onChange changes value", () => {
-    render(<Input label="Input" placeholder="This is placeholder text" error="this is an error text" />);
+    const onChangeHandler = jest.fn() as React.ChangeEventHandler<HTMLInputElement>;
+
+    render(<Input label="Input" placeholder="This is placeholder text" onChange={onChangeHandler} error="this is an error text" />);
 
     const label = screen.getByTestId("label");
     const input = screen.getByPlaceholderText("This is placeholder text") as HTMLInputElement;
@@ -15,7 +17,7 @@ describe("Input component tests", () => {
 
     fireEvent.change(input, { target: { value: "input changed" } });
 
-    expect(input.value).toBe("input changed");
+    expect(onChangeHandler).toHaveBeenCalled();
   });
 
   it("Input password shows and password show-hide is working", () => {
