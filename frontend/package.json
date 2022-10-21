@@ -62,7 +62,6 @@
     "msw": "^0.47.4",
     "redux-devtools-extension": "^2.13.9",
     "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.1",
     "whatwg-fetch": "^3.6.2"
   }
 }
