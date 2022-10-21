@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/react-shop/static/css/main.5329c2fc.css",
+    "main.js": "/react-shop/static/js/main.b4f6a7b4.js",
+    "static/js/787.affa5bbf.chunk.js": "/react-shop/static/js/787.affa5bbf.chunk.js",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-600.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-600.ee10975e3777aa3d660a.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-700.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-700.5f15d450751deb1b96f8.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-500.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-500.601f7dcb9fea2e157d6d.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-300.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-300.a056266d2538ce018dae.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-200.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-200.46719cc33b9c09bdef2a.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-regular.2346733ac7062d6402c0.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-800.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-800.f3fb66ddc6c2e73a46d0.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-100.woff": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-100.db75c029dbb127e00c97.woff",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-600.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-600.268b0e6fff96fe9bc915.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-300.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-300.9f95005197e1b13be1af.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-500.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-500.70245e9e620775b6ce74.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-700.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-700.a2960a151edb7e6f5ec7.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-200.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-200.8343e86cf94447f2744a.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-800.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-800.307d2657d4be5650891e.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-regular.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-regular.01ad2faf9d52ca180b12.woff2",
+    "static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-100.woff2": "/react-shop/static/media/jetbrains-mono-v13-latin-ext_latin_cyrillic-ext_cyrillic-100.6e841810fa5918f491b3.woff2",
+    "static/media/eye-hide.svg": "/react-shop/static/media/eye-hide.15da693d8eb26d17e03a6785d590524e.svg",
+    "static/media/eye-show.svg": "/react-shop/static/media/eye-show.d6c4920054f8a0b2b563535fff34e927.svg",
+    "static/media/close.svg": "/react-shop/static/media/close.9051e0471d9a7c5444a0b84e35b6a530.svg",
+    "index.html": "/react-shop/index.html",
+    "static/media/cart.svg": "/react-shop/static/media/cart.29fdaa89f2802cca742c24d3046994bd.svg",
+    "main.5329c2fc.css.map": "/react-shop/static/css/main.5329c2fc.css.map",
+    "main.b4f6a7b4.js.map": "/react-shop/static/js/main.b4f6a7b4.js.map",
+    "787.affa5bbf.chunk.js.map": "/react-shop/static/js/787.affa5bbf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5329c2fc.css",
+    "static/js/main.b4f6a7b4.js"
+  ]
+}
