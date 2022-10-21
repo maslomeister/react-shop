@@ -75,7 +75,7 @@ export const CartAmount: React.FC<IProps> = ({ id, inStock, authToken }) => {
         <p data-testid="dec" className={styles["change-amount"]} onClick={() => changeAmountToCart("dec")}>
           -
         </p>
-        <p className={styles["change-amount"]}>{cartAmount}</p>
+        <p className={styles["show-amount"]}>{cartAmount}</p>
         <p data-testid="inc" className={styles["change-amount"]} onClick={() => changeAmountToCart("inc")}>
           +
         </p>
