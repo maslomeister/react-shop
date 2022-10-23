@@ -1,0 +1,65 @@
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  cursor: pointer;
+}
+
+.modal {
+  position: relative;
+  background: #303030;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  box-sizing: border-box;
+  border-radius: 40px;
+  width: 600px;
+  align-items: start;
+  cursor: auto;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 360px;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin-right: 32px;
+  margin-top: 16px;
+}
+
+.login-register {
+  text-align: center;
+  padding-bottom: 32px;
+  cursor: pointer;
+  color: #ffffffcc;
+}
+
+.login-register:hover {
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    background: #303030;
+  }
+}

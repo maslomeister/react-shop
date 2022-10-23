@@ -13,10 +13,19 @@
 
 .container {
   display: grid;
+  gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
   grid-template-rows: repeat(auto-fit, minmax(332px, max-content));
   justify-content: center;
   margin-bottom: 64px;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 700px;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (min-width: 760px) {

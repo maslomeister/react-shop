@@ -36,3 +36,16 @@
   justify-content: center;
   gap: 16px;
 }
+
+@media screen and (max-width: 699px) {
+  .shop-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .image {
+    width: 300px;
+    align-self: center;
+  }
+}
