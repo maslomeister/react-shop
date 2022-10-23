@@ -28,11 +28,7 @@ export const EditOrBuyButton: React.FC<IProps> = ({
   children,
 }) => {
   const setEditModeHandler = (mode: boolean) => {
-    if (mode) {
-      setEditMode(mode);
-    } else {
-      setEditMode(mode);
-    }
+    setEditMode(mode);
   };
 
   const error = useMemo(() => {
