@@ -41,20 +41,16 @@ export const CartItem: React.FC<IProps> = ({ id, name, price, quantity, total })
   });
 
   const changeAmountToCart = (action: string) => {
-    switch (action) {
-      case "inc":
-        changeAmount(1);
-        break;
-      case "dec":
-        if (quantity - 1 === 0) {
-          deleteItem();
-        } else {
-          changeAmount(-1);
-        }
-        break;
-      default:
-        changeAmount(1);
-        break;
+    if (action === "inc") {
+      return changeAmount(1);
+    }
+
+    if (action === "dec") {
+      if (quantity - 1 === 0) {
+        return deleteItem();
+      } else {
+        return changeAmount(-1);
+      }
     }
   };
 
